@@ -3,6 +3,14 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {},
+    colors: {
+      white: "#ffffff",
+      purple: "#4461F2",
+      skyblue: "#EAF0F7",
+      gray: "#DDDFDD",
+      black: "#000000",
+      yellow: "#DDA82A",
+    },
   },
   plugins: [],
 };
