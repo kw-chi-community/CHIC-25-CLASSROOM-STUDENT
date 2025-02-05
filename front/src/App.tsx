@@ -5,31 +5,52 @@ import MyPage from "./pages/MyPage/MyPage";
 import MakeReservation from "./pages/MakeReservation/MakeReservation";
 import Login from "./pages/Login/Login";
 import ReservationStatus from "./pages/ReservationStatus/ReservationStatus";
+import Layout from "./components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />, // "/" URL에서는 Home 컴포넌트 렌더링
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: "/login",
-    element: <Login />, // "/" URL에서는 Home 컴포넌트 렌더링
+    element: <Login />,
   },
   {
     path: "/make-reservation",
-    element: <MakeReservation />, // "/reservation" URL에서는 Reservation 컴포넌트 렌더링
+    element: (
+      <Layout>
+        <MakeReservation />
+      </Layout>
+    ),
   },
   {
     path: "/reservation-status",
-    element: <ReservationStatus />, // "/reservation" URL에서는 Reservation 컴포넌트 렌더링
+    element: (
+      <Layout>
+        <ReservationStatus />
+      </Layout>
+    ),
   },
   {
     path: "/notice",
-    element: <Notice />, // "/notice" URL에서는 Notice 컴포넌트 렌더링
+    element: (
+      <Layout>
+        <Notice />
+      </Layout>
+    ),
   },
   {
     path: "/mypage",
-    element: <MyPage />, // "/mypage" URL에서는 MyPage 컴포넌트 렌더링
+    element: (
+      <Layout>
+        <MyPage />
+      </Layout>
+    ),
   },
 ]);
 
