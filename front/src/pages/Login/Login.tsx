@@ -18,7 +18,7 @@ const Login = () => {
         localStorage.setItem("jwtToken", token);
         navigate("/home"); // 로그인 성공 시 홈으로 이동
       }
-    } catch (error) {
+    } catch {
       alert("로그인 실패");
     }
   };
@@ -58,7 +58,7 @@ const Login = () => {
             placeholder="학번을 입력하세요"
             value={studentId}
             onChange={handleChange}
-            className="w-full p-4 border border-gray rounded-xl bg-skyblue text-gray-700 focus:ring-2 focus:ring-purple focus:outline-none text-center text-lg transition-all"
+            className="w-full p-4 border border-gray rounded-xl bg-skyblue text-gray-700 focus:ring-2 focus:ring-lightpurple focus:outline-none text-center text-lg transition-all"
             maxLength={10}
           />
         </div>

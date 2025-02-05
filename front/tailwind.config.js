@@ -6,6 +6,7 @@ export default {
     colors: {
       white: "#ffffff",
       purple: "#4461F2",
+      lightpurple: "#798df3",
       skyblue: "#EAF0F7",
       gray: "#DDDFDD",
       black: "#000000",
