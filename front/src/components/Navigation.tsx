@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white bg-opacity-80 shadow-md backdrop-blur-lg p-4 z-50">
+    <nav className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-[600px] bg-white bg-opacity-80 shadow-md backdrop-blur-lg p-4 z-50">
       <ul className="flex justify-around text-gray-600 max-w-[600px] mx-auto">
         <li>
           <Link
