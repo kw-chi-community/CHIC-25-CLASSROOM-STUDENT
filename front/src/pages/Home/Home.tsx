@@ -34,7 +34,7 @@ const Home = () => {
   }, {} as Record<number, ScheduleDTO[]>);
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen px-4 py-4">
+    <div className="pt-24 pb-28 flex flex-col items-center justify-start min-h-screen px-4 py-4">
       {/* 당일 예약 현황 */}
       <h2 className="text-xl sm:text-2xl font-bold">{today} 예약 현황</h2>
 

@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="relative flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 pt-16 pb-24">{children}</main>
+      <main className="flex-1">{children}</main>
       <Navigation />
     </div>
   );
