@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "./api/login";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 const Login = () => {
   const [studentId, setStudentId] = useState<string>("");
@@ -20,14 +22,6 @@ const Login = () => {
       }
     } catch {
       alert("로그인 실패");
-    }
-  };
-
-  // 학번 입력 핸들러 (10자리 숫자만 허용)
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/^\d{0,10}$/.test(value)) {
-      setStudentId(value);
     }
   };
 
@@ -53,28 +47,21 @@ const Login = () => {
 
         {/* 학번 입력 필드 */}
         <div className="mt-52">
-          <input
+          <Input
             type="text"
             placeholder="학번을 입력하세요"
             value={studentId}
-            onChange={handleChange}
-            className="w-full p-4 border border-gray rounded-xl bg-skyblue text-gray-700 focus:ring-2 focus:ring-lightpurple focus:outline-none text-center text-lg transition-all"
+            onChange={(e) => setStudentId(e.target.value)}
             maxLength={10}
           />
         </div>
 
         {/* 로그인 버튼 (10자리 숫자 입력 시 활성화) */}
-        <button
+        <Button
           onClick={handleLogin}
-          className={`w-full mt-6 p-4 rounded-xl font-semibold transition duration-300 text-white text-lg tracking-wide shadow-md ${
-            studentId.length === 10
-              ? "bg-purple bg-opacity-70 hover:bg-purple shadow-lg transform hover:scale-105"
-              : "bg-gray cursor-not-allowed"
-          }`}
-          disabled={studentId.length !== 10}
-        >
-          Sign In
-        </button>
+          text="Sign In"
+          isActive={studentId.length === 10}
+        />
       </div>
     </div>
   );
