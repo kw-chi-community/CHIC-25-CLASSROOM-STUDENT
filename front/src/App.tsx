@@ -6,6 +6,7 @@ import MakeReservation from "./pages/MakeReservation/MakeReservation";
 import Login from "./pages/Login/Login";
 import ReservationStatus from "./pages/ReservationStatus/ReservationStatus";
 import Layout from "./components/Layout";
+import { AuthProvider } from "./context/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;

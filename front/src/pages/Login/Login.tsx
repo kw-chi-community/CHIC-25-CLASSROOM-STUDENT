@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { login } from "./api/login";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { setUser } = useAuth();
   const [studentId, setStudentId] = useState<string>("");
   const navigate = useNavigate();
 
@@ -15,9 +17,9 @@ const Login = () => {
     }
 
     try {
-      const token = await login(studentId);
-      if (token) {
-        localStorage.setItem("jwtToken", token);
+      const userData = await login(studentId);
+      if (userData) {
+        setUser(userData);
         navigate("/home"); // 로그인 성공 시 홈으로 이동
       }
     } catch {

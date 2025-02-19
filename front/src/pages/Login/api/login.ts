@@ -5,7 +5,7 @@ export const login = async (studentId: string) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ studentId }),
+      body: JSON.stringify({ id: studentId }),
     });
 
     if (!response.ok) {
@@ -13,7 +13,11 @@ export const login = async (studentId: string) => {
     }
 
     const data = await response.json();
-    return data.token; // JWT 토큰 반환
+
+    // 토큰을 sessionStorage에 저장
+    sessionStorage.setItem("accessToken", data.data.accessToken);
+
+    return data.data;
   } catch (error) {
     console.error("로그인 에러:", error);
     throw error;
