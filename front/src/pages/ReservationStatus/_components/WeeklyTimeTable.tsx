@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ScheduleDTO } from "../../Home/ScheduleDTO";
+import { AllScheduleDTO } from "../AllScheduleDTO";
 
 interface WeeklyTimeTableProps {
-  scheduleData: ScheduleDTO[];
+  scheduleData: AllScheduleDTO[];
   selectedRoom: number;
 }
 
@@ -58,7 +58,7 @@ const WeeklyTimeTable: React.FC<WeeklyTimeTableProps> = ({
           className="px-4 py-2 bg-gray-300 rounded-md"
           onClick={() => setCurrentWeek((prev) => prev - 1)}
         >
-          ◀ 이전 주
+          ◀ 이전
         </button>
         <h3 className="text-lg font-semibold">
           {getFormattedDate(0)} ~ {getFormattedDate(4)}
@@ -67,7 +67,7 @@ const WeeklyTimeTable: React.FC<WeeklyTimeTableProps> = ({
           className="px-4 py-2 bg-gray-300 rounded-md"
           onClick={() => setCurrentWeek((prev) => prev + 1)}
         >
-          다음 주 ▶
+          다음 ▶
         </button>
       </div>
 
@@ -78,13 +78,13 @@ const WeeklyTimeTable: React.FC<WeeklyTimeTableProps> = ({
             <th className="border border-gray-300 px-4 py-2">시간</th>
             {daysOfWeek.map((day, index) => (
               <th key={day} className="border border-gray-300 px-4 py-2">
-                {day} ({getFormattedDate(index).slice(5)})
+                {day}({getFormattedDate(index).slice(5)})
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {timeSlots.map((time, timeIndex) => (
+          {timeSlots.map((time) => (
             <tr key={time}>
               <td className="border border-gray-300 px-4 py-2 text-center h-14 w-24">
                 {time}

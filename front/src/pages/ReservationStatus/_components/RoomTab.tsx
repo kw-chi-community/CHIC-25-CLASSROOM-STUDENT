@@ -1,5 +1,3 @@
-"use client";
-
 interface RoomTabProps {
   rooms: number[];
   selectedRoom: number | null;
@@ -17,9 +15,7 @@ const RoomTab: React.FC<RoomTabProps> = ({
         <button
           key={room}
           className={`px-4 py-2 border rounded-lg font-semibold ${
-            selectedRoom === room
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-700"
+            selectedRoom === room ? "text-lightpurple border-2" : "text-gray"
           }`}
           onClick={() => setSelectedRoom(room)}
         >

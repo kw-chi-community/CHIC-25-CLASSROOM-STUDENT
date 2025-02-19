@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ScheduleDTO } from "../Home/ScheduleDTO";
-import { fetchScheduleData } from "../Home/api/fetchScheduleData";
+import { AllScheduleDTO } from "./AllScheduleDTO";
+import { fetchAllScheduleData } from "./api/fetchAllScheduleData";
 import RoomTab from "./_components/RoomTab";
 import WeeklyTimeTable from "./_components/WeeklyTimeTable";
 
 const ReservationStatus = () => {
-  const [scheduleData, setScheduleData] = useState<ScheduleDTO[]>([]);
+  const [scheduleData, setScheduleData] = useState<AllScheduleDTO[]>([]);
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,7 @@ const ReservationStatus = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchScheduleData();
+        const data = await fetchAllScheduleData();
         setScheduleData(data);
 
         // 첫 번째 강의실을 기본 선택
