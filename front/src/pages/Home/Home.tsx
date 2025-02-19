@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchScheduleData } from "./api/fetchScheduleData";
-import { ScheduleDTO } from "./ScheduleDTO";
+import { fetchTodayScheduleData } from "./api/fetchTodayScheduleData";
+import { TodayScheduleDTO } from "./TodayScheduleDTO";
 
 const Home = () => {
-  const [scheduleData, setScheduleData] = useState<ScheduleDTO[]>([]);
+  const [todayScheduleData, setTodayScheduleData] = useState<
+    TodayScheduleDTO[]
+  >([]);
   const [today, setToday] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchScheduleData();
-      setScheduleData(data);
+      const data = await fetchTodayScheduleData();
+      setTodayScheduleData(data);
     };
 
     fetchData();
@@ -27,11 +29,11 @@ const Home = () => {
   }, []);
 
   // 강의실별로 그룹화
-  const groupedByRoom = scheduleData.reduce((acc, curr) => {
+  const groupedByRoom = todayScheduleData.reduce((acc, curr) => {
     acc[curr.roomNumber] = acc[curr.roomNumber] || [];
     acc[curr.roomNumber].push(curr);
     return acc;
-  }, {} as Record<number, ScheduleDTO[]>);
+  }, {} as Record<number, TodayScheduleDTO[]>);
 
   return (
     <div className="pt-24 pb-28 flex flex-col items-center justify-start min-h-screen px-4 py-4">
@@ -69,7 +71,7 @@ const Home = () => {
 
       {/* 예약 개수 요약 */}
       <p className="mt-4 text-gray-600 text-sm sm:text-base">
-        오늘 예약된 강의실: <strong>{scheduleData.length}건</strong>
+        오늘 예약된 강의실: <strong>{todayScheduleData.length}건</strong>
       </p>
     </div>
   );

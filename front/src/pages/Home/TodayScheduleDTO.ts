@@ -1,6 +1,5 @@
-export interface ScheduleDTO {
+export interface TodayScheduleDTO {
   roomNumber: number; // 강의실 번호
-  date: string; // 날짜
   title: string; // 강의 또는 예약 제목
   startTime: string; // 시작 시간 (HH:mm)
   endTime: string; // 종료 시간 (HH:mm)

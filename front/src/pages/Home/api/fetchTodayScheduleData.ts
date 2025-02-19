@@ -1,18 +1,20 @@
-import { ScheduleDTO } from "../ScheduleDTO";
+import { TodayScheduleDTO } from "../TodayScheduleDTO";
 // import axios from "axios";
 
 // 스케줄 데이터를 불러오는 API 함수
-// export const fetchScheduleData = async (
-//   roomNumber: string
-// ): Promise<ScheduleDTO[]> => {
+// export const fetchTodayScheduleData = async (): Promise<TodayScheduleDTO[]> => {
+//   const token = localStorage.getItem("accessToken");
+
 //   try {
 //     // 오늘 날짜를 YYYY-MM-DD 형식으로 변환
 //     const today = new Date().toISOString().split("T")[0];
 
 //     const response = await axios.get(`/api/status`, {
 //       params: {
-//         roomNumber,
 //         date: today, // YYYY-MM-DD 형식의 날짜 추가
+//       },
+//       headers: {
+//         Authorization: `Bearer ${token}`,
 //       },
 //     });
 
@@ -23,13 +25,12 @@ import { ScheduleDTO } from "../ScheduleDTO";
 //   }
 // };
 
-export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
+export const fetchTodayScheduleData = async (): Promise<TodayScheduleDTO[]> => {
   try {
     // Mock 데이터 반환
     return [
       {
         roomNumber: 103,
-        date: "2025-02-08",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -38,7 +39,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 104,
-        date: "2025-02-10",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -47,7 +47,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-05",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -56,7 +55,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-06",
         startTime: "11:00",
         endTime: "11:45",
         type: "강의",
@@ -65,7 +63,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-07",
         startTime: "13:00",
         endTime: "15:45",
         type: "예약",
@@ -74,7 +71,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-14",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -83,7 +79,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-18",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -92,7 +87,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-20",
         startTime: "10:00",
         endTime: "11:45",
         type: "예약",
@@ -101,7 +95,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-20",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -110,7 +103,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 103,
-        date: "2025-02-21",
         startTime: "10:00",
         endTime: "11:45",
         type: "강의",
@@ -119,7 +111,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 104,
-        date: "2025-02-22",
         startTime: "20:30",
         endTime: "23:00",
         type: "강의",
@@ -128,7 +119,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 205,
-        date: "2025-02-24",
         startTime: "20:30",
         endTime: "23:00",
         type: "강의",
@@ -137,7 +127,6 @@ export const fetchScheduleData = async (): Promise<ScheduleDTO[]> => {
       },
       {
         roomNumber: 715,
-        date: "2025-02-29",
         startTime: "20:30",
         endTime: "23:00",
         type: "강의",
