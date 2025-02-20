@@ -13,6 +13,12 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchTodayScheduleData();
+
+      // 시작 시간(startTime) 기준으로 정렬
+      data.sort((a, b) => {
+        return a.startTime.localeCompare(b.startTime); // 같은 날짜 내에서 startTime 오름차순 정렬
+      });
+
       setTodayScheduleData(data);
     };
 
@@ -38,6 +44,13 @@ const Home = () => {
   return (
     <div className="pt-24 pb-28 flex flex-col items-center justify-start min-h-screen px-4 py-4">
       {/* 당일 예약 현황 */}
+      {/* Blur 효과 원 (Ellipse 1 - 노란색) */}
+      <div className="absolute w-52 h-52 bg-yellow opacity-45 blur-[120px] left-[10%] top-[5%]"></div>
+
+      {/* Blur 효과 원 (Ellipse 2 - 보라색) */}
+      <div className="absolute w-52 h-52 bg-purple opacity-50 blur-[120px] right-[10%] top-[15%]"></div>
+
+      <div className="relative w-full max-w-lg text-left"></div>
       <h2 className="text-xl sm:text-2xl font-bold">{today} 예약 현황</h2>
 
       {/* 카드 UI로 예약 현황 표시 */}
@@ -45,20 +58,27 @@ const Home = () => {
         {Object.entries(groupedByRoom).map(([room, reservations]) => (
           <div
             key={room}
-            className="p-3 sm:p-4 border rounded-lg shadow-md bg-white w-full"
+            className="z-50 bg-white bg-opacity-40 p-6 shadow-lg rounded-xl"
           >
             <h3 className="text-lg sm:text-xl font-bold mb-2">{room}호</h3>
             {reservations.length > 0 ? (
               reservations.map((res, index) => (
                 <div
                   key={index}
-                  className="p-2 rounded-md text-black mb-2 border border-gray-300"
+                  className="p-2 text-black mb-2 border-l-4 border-l-gray"
                 >
                   <p className="text-sm sm:text-base font-semibold">
+                    <span
+                      className={`text-sm font-semibold px-2 py-0 mr-2 rounded-full text-white ${
+                        res.type === "강의" ? "bg-purple" : "bg-yellow"
+                      }`}
+                    >
+                      {res.type}
+                    </span>
                     {res.title}
                   </p>
                   <p className="text-xs sm:text-sm text-gray-600">
-                    {res.startTime} ~ {res.endTime} ({res.type})
+                    {res.startTime} ~ {res.endTime}{" "}
                   </p>
                 </div>
               ))

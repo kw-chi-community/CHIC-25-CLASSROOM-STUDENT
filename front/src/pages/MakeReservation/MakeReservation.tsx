@@ -66,7 +66,7 @@ const MakeReservation = () => {
       <div className="relative w-full max-w-lg text-left">
         <h2 className="text-2xl font-bold mb-4">강의실 예약</h2>
         <form
-          className=" bg-white bg-opacity-50 p-6 shadow-lg rounded-lg"
+          className=" bg-white bg-opacity-50 p-6 shadow-lg rounded-xl"
           onSubmit={handleSubmit}
         >
           {/* 날짜 선택 */}

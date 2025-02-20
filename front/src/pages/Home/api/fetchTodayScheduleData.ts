@@ -30,14 +30,6 @@ export const fetchTodayScheduleData = async (): Promise<TodayScheduleDTO[]> => {
     // Mock 데이터 반환
     return [
       {
-        roomNumber: 103,
-        startTime: "10:00",
-        endTime: "11:45",
-        type: "강의",
-        title: "웹서비스설계및실습",
-        professor: "김교수",
-      },
-      {
         roomNumber: 104,
         startTime: "10:00",
         endTime: "11:45",
@@ -73,34 +65,11 @@ export const fetchTodayScheduleData = async (): Promise<TodayScheduleDTO[]> => {
         roomNumber: 103,
         startTime: "10:00",
         endTime: "11:45",
-        type: "강의",
-        title: "알고리즘",
-        professor: "김교수",
-      },
-      {
-        roomNumber: 103,
-        startTime: "10:00",
-        endTime: "11:45",
-        type: "강의",
-        title: "웹서비스설계및실습",
-        professor: "김교수",
-      },
-      {
-        roomNumber: 103,
-        startTime: "10:00",
-        endTime: "11:45",
         type: "예약",
         title: "세미나",
         professor: "김교수",
       },
-      {
-        roomNumber: 103,
-        startTime: "10:00",
-        endTime: "11:45",
-        type: "강의",
-        title: "웹서비스설계및실습",
-        professor: "김교수",
-      },
+
       {
         roomNumber: 103,
         startTime: "10:00",
