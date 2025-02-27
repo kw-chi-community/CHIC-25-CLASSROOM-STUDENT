@@ -7,14 +7,17 @@ import Login from "./pages/Login/Login";
 import ReservationStatus from "./pages/ReservationStatus/ReservationStatus";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
-        <Home />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Home />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
@@ -24,33 +27,41 @@ const router = createBrowserRouter([
   {
     path: "/make-reservation",
     element: (
-      <Layout>
-        <MakeReservation />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <MakeReservation />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/reservation-status",
     element: (
-      <Layout>
-        <ReservationStatus />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <ReservationStatus />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/notice",
     element: (
-      <Layout>
-        <Notice />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <Notice />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
   {
     path: "/mypage",
     element: (
-      <Layout>
-        <MyPage />
-      </Layout>
+      <ProtectedRoute>
+        <Layout>
+          <MyPage />
+        </Layout>
+      </ProtectedRoute>
     ),
   },
 ]);
