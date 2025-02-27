@@ -5,6 +5,7 @@ const Header = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("accessToken"); // 토큰 삭제
+    sessionStorage.removeItem("studentId"); // 토큰 삭제
     navigate("/login"); // 로그인 페이지로 이동
   };
 

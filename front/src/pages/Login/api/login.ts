@@ -17,6 +17,9 @@ export const login = async (studentId: string) => {
     // 토큰을 sessionStorage에 저장
     sessionStorage.setItem("accessToken", data.data.accessToken);
 
+    // 사용자 학번을 sessionStorage에 저장
+    sessionStorage.setItem("studentId", data.data.id);
+
     return data.data;
   } catch (error) {
     console.error("로그인 에러:", error);
