@@ -12,16 +12,17 @@ export const fetchTodayScheduleData = async (): Promise<TodayScheduleDTO[]> => {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/api/status`,
       {
-        params: {
-          date: today, // YYYY-MM-DD 형식의 날짜 추가
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        params: { date: today },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
-    return response.data;
+    // 응답 데이터에서 `data` 속성만 반환
+    if (!Array.isArray(response.data.data)) {
+      throw new Error("API 응답 데이터 형식이 배열이 아닙니다.");
+    }
+
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching schedule data:", error);
     return [];
