@@ -11,7 +11,7 @@ const reservationRouter = require('./routes/reservation');
 // 2) 예약 현황 조회(/api/status) 라우터
 const statusRouter = require('./routes/status');
 // 3) 로그인/회원 관리 라우터 (예: /api/login 등)
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/auth');
 
 const app = express();
 app.use(cors());
