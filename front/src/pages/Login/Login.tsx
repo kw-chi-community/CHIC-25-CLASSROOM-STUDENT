@@ -20,7 +20,7 @@ const Login = () => {
       const userData = await login(studentId);
       if (userData) {
         setUser(userData);
-        navigate("/home"); // 로그인 성공 시 홈으로 이동
+        navigate("/"); // 로그인 성공 시 홈으로 이동
       }
     } catch {
       alert("로그인 실패");
