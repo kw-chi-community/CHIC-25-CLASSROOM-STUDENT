@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { classDB } = require('./mongoConnection'); // classDB 연결 가져오기
+const { classDB } = require('./mongodb'); // classDB 연결 가져오기
 
 const classSchema = new mongoose.Schema({
   class_idx: { type: String, required: true, unique: true }, // 강좌 학정 번호

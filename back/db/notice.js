@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { noticeDB } = require('./mongoConnection'); // ✅ noticeDB 가져오기
+const { noticeDB } = require('./mongodb'); // ✅ noticeDB 가져오기
 
 const noticeSchema = new mongoose.Schema({
   notice_idx: { type: String, required: true, unique: true }, // 홍보물 ID

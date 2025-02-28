@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { classDB } = require('./mongoConnection'); // classDB 연결 가져오기
+const { classDB } = require('./mongodb'); // classDB 연결 가져오기
 
 const classroomSchema = new mongoose.Schema({
   classroom_idx: { type: String, required: true, unique: true }, // 강의실 위치(호수)
