@@ -24,6 +24,9 @@ const SignUp = () => {
 
   const [userIdError, setUserIdError] = useState<string>("");
 
+  // 학번이 10자리인지 검사
+  const isStudentIdValid = studentId.length === 10;
+
   // 학번 중복 확인
   const handleCheckStudentId = async () => {
     try {
@@ -111,7 +114,7 @@ const SignUp = () => {
               <Button
                 onClick={handleCheckStudentId}
                 text={isIdCheckDisabled ? "사용 가능" : "중복 확인"}
-                isActive={!isIdCheckDisabled}
+                isActive={isStudentIdValid && !isIdCheckDisabled}
               />
             </div>
           </div>
