@@ -8,6 +8,7 @@ import ReservationStatus from "./pages/ReservationStatus/ReservationStatus";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SignUp from "./pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
   {
     path: "/make-reservation",

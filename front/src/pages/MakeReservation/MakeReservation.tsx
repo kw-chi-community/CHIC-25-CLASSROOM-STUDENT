@@ -39,18 +39,18 @@ const MakeReservation = () => {
       alert("모든 항목을 올바르게 입력해주세요!");
       return;
     }
-    if (startTime >= endTime) {
+
+    const isValidTimeRange = (startTime: string, endTime: string): boolean => {
+      const start = new Date(`2000-01-01T${startTime}:00`); // 예: "09:00" -> 2000-01-01T09:00:00
+      const end = new Date(`2000-01-01T${endTime}:00`);
+
+      return start < end;
+    };
+
+    if (!isValidTimeRange(startTime, endTime)) {
       alert("종료 시간은 시작 시간보다 늦어야 합니다.");
       return;
     }
-
-    console.log({
-      date,
-      startTime,
-      endTime,
-      room,
-      purpose,
-    });
 
     alert("예약이 완료되었습니다!");
   };

@@ -1,0 +1,24 @@
+name: "⚡ Improvement"
+description: "기능 개선 요청"
+labels: ["enhancement"]
+body:
+  - type: textarea
+    attributes:
+      label: 💡 개선할 기능
+      description: 어떤 기능을 개선하고 싶은지 설명해주세요.
+      placeholder: 예) 회원가입 UI 개선
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🚀 개선 방향
+      description: 어떻게 개선하면 좋을지 아이디어를 적어주세요.
+      placeholder: |
+        - 버튼을 더 크고 가독성 좋게 변경
+        - 필수 입력 항목을 강조
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🤔 기대하는 결과
+      description: 개선 후 어떤 결과를 기대하는지 적어주세요.
