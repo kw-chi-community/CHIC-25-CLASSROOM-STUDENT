@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`w-full mt-6 p-2 rounded-xl font-semibold transition duration-300 text-white text-lg tracking-wide shadow-md ${
+      className={`w-full mb-2 p-2 rounded-xl font-semibold transition duration-300 text-white text-lg tracking-wide shadow-md ${
         isActive
           ? "bg-purple bg-opacity-70 hover:bg-purple shadow-lg transform hover:scale-105"
           : "bg-gray cursor-not-allowed"
