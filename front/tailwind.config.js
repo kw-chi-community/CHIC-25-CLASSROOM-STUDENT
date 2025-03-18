@@ -10,6 +10,7 @@ export default {
       skyblue: "#EAF0F7",
       gray: "#DDDFDD",
       black: "#000000",
+      darkgray: "#a5a5a5",
       yellow: "#DDA82A",
     },
   },

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "./api/login";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -8,11 +8,13 @@ import { useAuth } from "../../context/AuthContext";
 const Login = () => {
   const { setUser } = useAuth();
   const [studentId, setStudentId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (studentId.length !== 10 || isNaN(Number(studentId))) {
-      alert("10자리 숫자 학번을 입력하세요.");
+    if (isNaN(Number(studentId)) || isNaN(Number(password))) {
+      alert("학번과 비밀번호를 모두 입력하세요.");
       return;
     }
 
@@ -46,9 +48,8 @@ const Login = () => {
           강의실 예약 및 예약현황을 보고 싶다면 <br />
           학번으로 로그인하세요!
         </p>
-
         {/* 학번 입력 필드 */}
-        <div className="mt-52">
+        <div className="mt-52 mb-8 flex flex-col gap-2">
           <Input
             type="text"
             placeholder="학번을 입력하세요"
@@ -56,14 +57,28 @@ const Login = () => {
             onChange={(e) => setStudentId(e.target.value)}
             maxLength={10}
           />
+          <Input
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-
         {/* 로그인 버튼 (10자리 숫자 입력 시 활성화) */}
         <Button
           onClick={handleLogin}
           text="Sign In"
-          isActive={studentId.length === 10}
+          isActive={studentId.length === 10 && !!password}
         />
+        <p className="mt-4 text-center text-darkgray">
+          계정이 없으신가요?{" "}
+          <Link
+            to={"/signup"}
+            className="text-lightpurple hover:text-blue-800 font-semibold transition duration-200"
+          >
+            회원가입
+          </Link>
+        </p>
       </div>
     </div>
   );
