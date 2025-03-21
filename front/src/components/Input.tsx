@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
       onChange={onChange}
       onBlur={onBlur}
       maxLength={maxLength}
-      className="w-full p-2 mb-2 border border-gray rounded-xl bg-skyblue text-gray-700 focus:ring-2 focus:ring-lightpurple focus:outline-none text-center text-lg transition-all"
+      className="w-full p-2 mb-2 border border-gray rounded-xl bg-skyblue text-gray-700 focus:ring-2 focus:ring-lightpurple focus:outline-none text-lg transition-all"
     />
   );
 };

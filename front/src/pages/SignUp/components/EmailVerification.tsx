@@ -86,7 +86,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
   }, [countdown]);
 
   return (
-    <div className="mb-6">
+    <div>
       {/* 이메일 입력 + 인증 요청 버튼 */}
       <div className="flex space-x-2">
         <div className="flex-grow-[2]">
