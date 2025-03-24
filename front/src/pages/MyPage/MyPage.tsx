@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchMyPageData } from "./api/fetchMyPageData";
 import { MyPageDto } from "./MyPageDto";
+import PageWrapper from "../../components/PageWrapper";
 
 const MyPage: React.FC = () => {
   const [userData, setUserData] = useState<MyPageDto | null>(null);
@@ -20,11 +21,7 @@ const MyPage: React.FC = () => {
   }, [studentId]);
 
   return (
-    <div className="pt-24 pb-28 flex flex-col items-center justify-start min-h-screen px-4 py-4 relative">
-      {/* Blur 효과 배경 */}
-      <div className="absolute w-52 h-52 bg-yellow opacity-45 blur-[120px] left-[10%] top-[5%]"></div>
-      <div className="absolute w-52 h-52 bg-purple opacity-50 blur-[120px] right-[10%] top-[15%]"></div>
-
+    <PageWrapper>
       {/* 프로필 카드 */}
       <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full max-w-lg text-center relative z-10">
         <h2 className="text-xl font-bold text-gray-900">내 프로필</h2>
@@ -63,7 +60,7 @@ const MyPage: React.FC = () => {
           <p className="text-sm text-gray-500 mt-2">예약 내역이 없습니다.</p>
         )}
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 

@@ -5,6 +5,7 @@ import { checkIdAvailability } from "./api/checkIdAvailability";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import EmailVerification from "./components/EmailVerification";
+import CenteredPageWrapper from "../../components/CenteredPageWrapper";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -83,17 +84,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen px-6 overflow-hidden">
-      {/* 배경 효과 */}
-      <div className="absolute w-52 h-52 bg-yellow opacity-45 blur-[120px] left-[10%] top-[5%]"></div>
-      <div className="absolute w-52 h-52 bg-purple opacity-50 blur-[120px] right-[10%] top-[15%]"></div>
-
+    <CenteredPageWrapper>
       <div className="relative w-full max-w-lg text-left">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black">
-          회원가입
-        </h1>
-
-        <div className="mt-10 space-y-4">
+        <div className="mt-10 space-y-6">
           {/* 이메일 인증 */}
           <EmailVerification
             onVerify={() => setIsEmailVerified(true)}
@@ -159,7 +152,7 @@ const SignUp = () => {
           />
         </div>
       </div>
-    </div>
+    </CenteredPageWrapper>
   );
 };
 

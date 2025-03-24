@@ -5,6 +5,7 @@ import { AllScheduleDTO } from "./AllScheduleDTO";
 import { fetchAllScheduleData } from "./api/fetchAllScheduleData";
 import RoomTab from "./_components/RoomTab";
 import WeeklyTimeTable from "./_components/WeeklyTimeTable";
+import PageWrapper from "../../components/PageWrapper";
 
 const ReservationStatus = () => {
   const [scheduleData, setScheduleData] = useState<AllScheduleDTO[]>([]);
@@ -45,30 +46,10 @@ const ReservationStatus = () => {
     return <p className="text-red-500 text-center mt-10">❌ {error}</p>;
   }
 
-  // 강의실 목록 가져오기
-  const roomNumbers = Array.from(
-    new Set(scheduleData.map((item) => item.roomNumber))
-  );
-
   return (
-    <div className="pt-24 pb-28 flex flex-col items-center min-h-screen px-4 py-6">
+    <PageWrapper>
       <h2 className="text-2xl font-bold mb-4">📅 예약 현황</h2>
-
-      {/* 강의실 선택 탭 */}
-      <RoomTab
-        rooms={roomNumbers}
-        selectedRoom={selectedRoom}
-        setSelectedRoom={setSelectedRoom}
-      />
-
-      {/* 주간 타임테이블 */}
-      {selectedRoom && (
-        <WeeklyTimeTable
-          scheduleData={scheduleData}
-          selectedRoom={selectedRoom}
-        />
-      )}
-    </div>
+    </PageWrapper>
   );
 };
 

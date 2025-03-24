@@ -4,6 +4,7 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
+import CenteredPageWrapper from "../../components/CenteredPageWrapper";
 
 const MakeReservation = () => {
   const [date, setDate] = useState("");
@@ -56,52 +57,53 @@ const MakeReservation = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen px-6 overflow-hidden">
-      {/* Blur 효과 원 (Ellipse 1 - 노란색) */}
-      <div className="absolute w-52 h-52 bg-yellow opacity-45 blur-[120px] left-[10%] top-[5%]"></div>
-
-      {/* Blur 효과 원 (Ellipse 2 - 보라색) */}
-      <div className="absolute w-52 h-52 bg-purple opacity-50 blur-[120px] right-[10%] top-[15%]"></div>
-
-      <div className="relative w-full max-w-lg text-left">
-        <h2 className="text-2xl font-bold mb-4">강의실 예약</h2>
-        <form
-          className=" bg-white bg-opacity-50 p-6 shadow-lg rounded-xl"
-          onSubmit={handleSubmit}
-        >
-          {/* 날짜 선택 */}
+    <CenteredPageWrapper>
+      <form
+        className=" bg-white bg-opacity-50 p-6 w-full max-w-lg shadow-lg rounded-xl space-y-3"
+        onSubmit={handleSubmit}
+      >
+        {/* 날짜 선택 */}
+        <div>
           <label className="block mb-2 font-semibold">예약 날짜</label>
           <Input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
+        </div>
 
-          {/* 강의실 선택 */}
+        {/* 강의실 선택 */}
+        <div>
           <label className="block mb-2 font-semibold">강의실 선택</label>
           <Select
             options={["강의실 선택", "103호", "104호", "205호", "715호"]}
             value={room}
             onChange={(e) => setRoom(e.target.value)}
           />
+        </div>
 
-          {/* 시작 시간 선택 */}
+        {/* 시작 시간 선택 */}
+        <div>
           <label className="block mb-2 font-semibold">시작 시간</label>
           <Select
             options={["시작 시간 선택", ...timeOptions]}
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
+        </div>
 
-          {/* 종료 시간 선택 */}
+        {/* 종료 시간 선택 */}
+        <div>
           <label className="block mb-2 font-semibold">종료 시간</label>
           <Select
             options={["종료 시간 선택", ...timeOptions]}
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
+        </div>
 
-          {/* 용도 입력 */}
+        {/* 용도 입력 */}
+        <div>
           <label className="block mb-2 font-semibold">
             용도 입력 (최대 10자)
           </label>
@@ -112,12 +114,14 @@ const MakeReservation = () => {
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
           />
+        </div>
 
-          {/* 예약 버튼 */}
+        {/* 예약 버튼 */}
+        <div className="pt-10">
           <Button type="submit" text="예약하기" isActive={isFormValid} />
-        </form>
-      </div>
-    </div>
+        </div>
+      </form>
+    </CenteredPageWrapper>
   );
 };
 

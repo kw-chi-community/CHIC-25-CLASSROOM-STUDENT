@@ -4,6 +4,7 @@ import { login } from "./api/login";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../context/AuthContext";
+import CenteredPageWrapper from "../../components/CenteredPageWrapper";
 
 const Login = () => {
   const { setUser } = useAuth();
@@ -30,13 +31,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen px-6 overflow-hidden">
-      {/* Blur 효과 원 (Ellipse 1 - 노란색) */}
-      <div className="absolute w-52 h-52 bg-yellow opacity-45 blur-[120px] left-[10%] top-[5%]"></div>
-
-      {/* Blur 효과 원 (Ellipse 2 - 보라색) */}
-      <div className="absolute w-52 h-52 bg-purple opacity-50 blur-[120px] right-[10%] top-[15%]"></div>
-
+    <CenteredPageWrapper>
       <div className="relative w-full max-w-lg text-left">
         {/* 제목 */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black">
@@ -80,7 +75,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
-    </div>
+    </CenteredPageWrapper>
   );
 };
 
