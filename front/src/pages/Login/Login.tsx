@@ -13,8 +13,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (isNaN(Number(studentId)) || isNaN(Number(password))) {
-      alert("학번과 비밀번호를 모두 입력하세요.");
+    if (isNaN(Number(studentId)) || studentId.length !== 10) {
+      alert("학번 10자리를 정확히 입력해주세요.");
       return;
     }
 
