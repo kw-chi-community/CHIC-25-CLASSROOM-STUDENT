@@ -1,70 +1,68 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Notice from "./pages/Notice/Notice";
-import MyPage from "./pages/MyPage/MyPage";
-import MakeReservation from "./pages/MakeReservation/MakeReservation";
-import Login from "./pages/Login/Login";
-import ReservationStatus from "./pages/ReservationStatus/ReservationStatus";
+import { ROUTES } from "./constants/routes";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SignUp from "./pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.HOME.path,
     element: (
       <ProtectedRoute>
         <Layout>
-          <Home />
+          <ROUTES.HOME.element />
         </Layout>
       </ProtectedRoute>
     ),
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: ROUTES.LOGIN.path,
+    element: <ROUTES.LOGIN.element />,
   },
   {
-    path: "/signup",
-    element: <SignUp />,
+    path: ROUTES.SIGNUP.path,
+    element: (
+      <Layout>
+        <ROUTES.SIGNUP.element />
+      </Layout>
+    ),
   },
   {
-    path: "/make-reservation",
+    path: ROUTES.MAKE_RESERVATION.path,
     element: (
       <ProtectedRoute>
         <Layout>
-          <MakeReservation />
+          <ROUTES.MAKE_RESERVATION.element />
         </Layout>
       </ProtectedRoute>
     ),
   },
   {
-    path: "/reservation-status",
+    path: ROUTES.RESERVATION_STATUS.path,
     element: (
       <ProtectedRoute>
         <Layout>
-          <ReservationStatus />
+          <ROUTES.RESERVATION_STATUS.element />
         </Layout>
       </ProtectedRoute>
     ),
   },
   {
-    path: "/notice",
+    path: ROUTES.NOTICE.path,
     element: (
       <ProtectedRoute>
         <Layout>
-          <Notice />
+          <ROUTES.NOTICE.element />
         </Layout>
       </ProtectedRoute>
     ),
   },
   {
-    path: "/mypage",
+    path: ROUTES.MYPAGE.path,
     element: (
       <ProtectedRoute>
         <Layout>
-          <MyPage />
+          <ROUTES.MYPAGE.element />
         </Layout>
       </ProtectedRoute>
     ),
