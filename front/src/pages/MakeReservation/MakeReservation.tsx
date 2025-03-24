@@ -74,42 +74,43 @@ const MakeReservation = () => {
           />
         </div>
 
-        {/* 건물 선택 */}
+        {/* 건물 + 강의실 선택 */}
         <div>
-          <label className="block mb-2 font-semibold">건물 선택</label>
-          <Select
-            options={[
-              "건물 선택",
-              "복지관",
-              "비마관",
-              "새빛관",
-              "연구관",
-              "옥의관",
-              "참빛관",
-              "한울관",
-              "화도관",
-              "80주년 기념관",
-            ]}
-            value={building}
-            onChange={(e) => setBuilding(e.target.value)}
-          />
-        </div>
-
-        {/* 강의실 선택 */}
-        <div>
-          <label className="block mb-2 font-semibold">강의실 선택</label>
-          <Select
-            options={["강의실 선택", "103호", "104호", "205호", "715호"]}
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
-          />
+          <div className="block mb-2 font-semibold">대여 장소</div>
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <Select
+                options={[
+                  "건물",
+                  "복지관",
+                  "비마관",
+                  "새빛관",
+                  "연구관",
+                  "옥의관",
+                  "참빛관",
+                  "한울관",
+                  "화도관",
+                  "80주년 기념관",
+                ]}
+                value={building}
+                onChange={(e) => setBuilding(e.target.value)}
+              />
+            </div>
+            <div className="flex-1">
+              <Select
+                options={["강의실", "103호", "104호", "205호", "715호"]}
+                value={room}
+                onChange={(e) => setRoom(e.target.value)}
+              />
+            </div>
+          </div>
         </div>
 
         {/* 시작 시간 선택 */}
         <div>
           <label className="block mb-2 font-semibold">시작 시간</label>
           <Select
-            options={["시작 시간 선택", ...timeOptions]}
+            options={["시작 시간", ...timeOptions]}
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
@@ -119,7 +120,7 @@ const MakeReservation = () => {
         <div>
           <label className="block mb-2 font-semibold">종료 시간</label>
           <Select
-            options={["종료 시간 선택", ...timeOptions]}
+            options={["종료 시간", ...timeOptions]}
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
