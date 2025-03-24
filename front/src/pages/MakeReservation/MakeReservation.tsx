@@ -8,6 +8,7 @@ import CenteredPageWrapper from "../../components/CenteredPageWrapper";
 
 const MakeReservation = () => {
   const [date, setDate] = useState("");
+  const [building, setBuilding] = useState("");
   const [room, setRoom] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -28,6 +29,7 @@ const MakeReservation = () => {
     date &&
       startTime &&
       endTime &&
+      building &&
       room &&
       purpose.length > 0 &&
       purpose.length <= 10
@@ -69,6 +71,27 @@ const MakeReservation = () => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+
+        {/* 건물 선택 */}
+        <div>
+          <label className="block mb-2 font-semibold">건물 선택</label>
+          <Select
+            options={[
+              "건물 선택",
+              "복지관",
+              "비마관",
+              "새빛관",
+              "연구관",
+              "옥의관",
+              "참빛관",
+              "한울관",
+              "화도관",
+              "80주년 기념관",
+            ]}
+            value={building}
+            onChange={(e) => setBuilding(e.target.value)}
           />
         </div>
 
