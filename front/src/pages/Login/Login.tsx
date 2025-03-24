@@ -40,12 +40,12 @@ const Login = () => {
       <div className="relative w-full max-w-lg text-left">
         {/* 제목 */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black">
-          정보융합학부
+          광운대학교
           <br />
           강의실 예약 시스템
         </h1>
         <p className="text-gray-600 mt-3">
-          강의실 예약 및 예약현황을 보고 싶다면 <br />
+          강의실을 예약하거나 예약 현황을 확인하려면 <br />
           학번으로 로그인하세요!
         </p>
         {/* 학번 입력 필드 */}
@@ -67,7 +67,7 @@ const Login = () => {
         {/* 로그인 버튼 (10자리 숫자 입력 시 활성화) */}
         <Button
           onClick={handleLogin}
-          text="Sign In"
+          text="로그인"
           isActive={studentId.length === 10 && !!password}
         />
         <p className="mt-4 text-center text-darkgray">
