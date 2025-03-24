@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchTodayScheduleData } from "./api/fetchTodayScheduleData";
 import { TodayScheduleDTO } from "./TodayScheduleDTO";
+import PageWrapper from "../../components/PageWrapper";
 
 const Home = () => {
   const [todayScheduleData, setTodayScheduleData] = useState<
@@ -42,15 +43,7 @@ const Home = () => {
   }, {} as Record<number, TodayScheduleDTO[]>);
 
   return (
-    <div className="pt-24 pb-28 flex flex-col items-center justify-start min-h-screen px-4 py-4">
-      {/* 당일 예약 현황 */}
-      {/* Blur 효과 원 (Ellipse 1 - 노란색) */}
-      <div className="absolute w-52 h-52 bg-yellow opacity-45 blur-[120px] left-[10%] top-[5%]"></div>
-
-      {/* Blur 효과 원 (Ellipse 2 - 보라색) */}
-      <div className="absolute w-52 h-52 bg-purple opacity-50 blur-[120px] right-[10%] top-[15%]"></div>
-
-      <div className="relative w-full max-w-lg text-left"></div>
+    <PageWrapper>
       <h2 className="text-xl sm:text-2xl font-bold">{today} 예약 현황</h2>
 
       {/* 카드 UI로 예약 현황 표시 */}
@@ -93,7 +86,7 @@ const Home = () => {
       <p className="mt-4 text-gray-600 text-sm sm:text-base">
         오늘 예약된 강의실: <strong>{todayScheduleData.length}건</strong>
       </p>
-    </div>
+    </PageWrapper>
   );
 };
 
