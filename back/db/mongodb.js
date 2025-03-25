@@ -41,3 +41,4 @@ studentDB.on('connected', () => console.log('MongoDB (student) 연결 완료'));
 studentDB.on('error', err => console.error('MongoDB (student) 연결 실패:', err));
 
 module.exports = { studentDB };
+module.exports = { userDB, classDB, noticeDB, studentDB };
