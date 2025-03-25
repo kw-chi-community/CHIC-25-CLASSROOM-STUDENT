@@ -2,17 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-// 이미 정의해둔 DB 연결
-const { userDB, classDB, noticeDB } = require('./db/mongodb');
-
-// 개별 라우터 불러오기
-// 1) 예약 생성/조회용 라우터
-const reservationRouter = require('./routes/reservation');
-// 2) 예약 현황 조회(/api/status) 라우터
-const statusRouter = require('./routes/status');
-// 3) 로그인/회원 관리 라우터 (예: /api/login 등)
-const usersRouter = require('./routes/auth');
-
+// DB 연결
+const { userDB, classDB, noticeDB, studentDB } = require('./db/mongodb');
 
 const app = express();
 app.use(cors());
@@ -24,12 +15,15 @@ app.get('/', (req, res) => {
 });
 
 // 라우터 등록
-app.use('/api', reservationRouter);  // 예: POST /api/reserve, GET /api/reserve ...
-app.use('/api', statusRouter);       // 예: GET /api/status ...
-app.use('/api', usersRouter);        // 예: POST /api/login, GET /api/mypage ...
+app.use('/api', require('./routes/reservation'));        // 예약 관련
+app.use('/api', require('./routes/status'));             // 예약 현황
+app.use('/api', require('./routes/auth'));               // 로그인
+app.use('/api', require('./routes/registerRouter'));     // 회원가입 (POST /api/signup)
+app.use('/api', require('./routes/studentIdRouter'));    // 학번 중복 검사 (POST /api/signup/check-id)
+app.use('/api', require('./routes/sendEmailRouter'));    // 이메일 인증 (POST /api/signup/email)
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
