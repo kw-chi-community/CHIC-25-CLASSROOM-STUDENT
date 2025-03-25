@@ -3,7 +3,7 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
 interface EmailVerificationProps {
-  onVerify: (isVerified: boolean) => void;
+  onVerify: (otpCode: string) => void;
   setEmail: (email: string) => void;
 }
 
@@ -40,7 +40,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     setLoading(true);
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/sendEmail`,
+        `${import.meta.env.VITE_API_URL}/api/signup/email`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -69,7 +69,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
       setIsVerified(true);
       setAuthMsg("");
       setCountdown(-1);
-      onVerify(true);
+      onVerify(serverCode); //인증코드 전달
     } else {
       setAuthMsg("잘못된 인증번호입니다. 다시 시도하세요.");
     }

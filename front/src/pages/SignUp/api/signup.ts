@@ -3,6 +3,7 @@ interface SignupData {
   studentId: string;
   name: string;
   password: string;
+  otp: string; // ✅ 추가!
 }
 
 interface SignupResponse {
@@ -19,13 +20,16 @@ export const signup = async (data: SignupData): Promise<SignupResponse> => {
       },
       body: JSON.stringify({
         email: data.email,
-        id: data.studentId,
+        studentId: data.studentId, // ✅ 수정!
         name: data.name,
         password: data.password,
+        otp: data.otp, // ✅ 그대로 사용 가능
       }),
     });
 
     if (!response.ok) {
+      const errText = await response.text();
+      console.error("서버 응답 내용:", errText);
       throw new Error("회원가입 실패");
     }
 

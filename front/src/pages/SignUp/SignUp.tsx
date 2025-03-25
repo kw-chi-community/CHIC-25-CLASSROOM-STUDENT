@@ -11,6 +11,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   // 상태 관리
+  const [otp, setOtp] = useState<string>(""); // ✅ 인증코드 상태 추가
   const [email, setEmail] = useState<string>("");
   const [studentId, setStudentId] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -20,9 +21,7 @@ const SignUp = () => {
   const [isIdValid, setIsIdValid] = useState<boolean>(false);
   const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(true);
   const [isEmailVerified, setIsEmailVerified] = useState<boolean>(false);
-
   const [isIdCheckDisabled, setIsIdCheckDisabled] = useState<boolean>(false);
-
   const [userIdError, setUserIdError] = useState<string>("");
 
   // 학번이 10자리인지 검사
@@ -61,7 +60,13 @@ const SignUp = () => {
     if (!isFormComplete()) return;
 
     try {
-      await signup({ email, studentId, name, password: password1 });
+      await signup({
+        email,
+        studentId,
+        name,
+        password: password1,
+        otp, // ✅ 인증번호 함께 전달
+      });
       alert("회원가입 성공!");
       navigate("/login");
     } catch (error) {
@@ -89,7 +94,10 @@ const SignUp = () => {
         <div className="mt-10 space-y-6">
           {/* 이메일 인증 */}
           <EmailVerification
-            onVerify={() => setIsEmailVerified(true)}
+            onVerify={(code: string) => {
+              setOtp(code);
+              setIsEmailVerified(true);
+            }}
             setEmail={setEmail}
           />
 

@@ -20,7 +20,7 @@ const Login = () => {
     }
 
     try {
-      const userData = await login(studentId);
+      const userData = await login(studentId, password); // ✅ 수정된 부분
       if (userData) {
         setUser(userData);
         navigate("/"); // 로그인 성공 시 홈으로 이동

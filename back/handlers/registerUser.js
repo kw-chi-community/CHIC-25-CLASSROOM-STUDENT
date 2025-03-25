@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+const Student = require("../db/student");
 const { otpStorage } = require("./sendEmail"); // OTP 저장소 사용
 
 const handler = async (req, res) => {
@@ -15,8 +15,8 @@ const handler = async (req, res) => {
   }
 
   // 학번 중복 검사
-  const existingUser = await User.findOne({ studentId });
-  if (existingUser) {
+  const existingStudent = await Student.findOne({ studentId });
+  if (existingStudent) {
     return res.status(409).json({ ok: false, message: "이미 존재하는 학번입니다." });
   }
 
@@ -24,14 +24,14 @@ const handler = async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // 사용자 저장
-  const newUser = new User({
+  const newStudent = new Student({
     studentId,
     email,
     name,
     password: hashedPassword,
   });
 
-  await newUser.save();
+  await newStudent.save();
 
   res.status(201).json({ ok: true, message: "회원가입 성공!" });
 };

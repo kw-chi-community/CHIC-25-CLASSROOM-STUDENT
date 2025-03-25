@@ -37,4 +37,4 @@ const handler = async (req, res) => {
   }
 };
 
-module.exports = handler;
+module.exports = { handler, otpStorage };
