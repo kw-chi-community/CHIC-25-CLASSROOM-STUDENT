@@ -40,7 +40,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/api/sendEmail`,
+        `${import.meta.env.VITE_API_URL}/api/sendEmail`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
