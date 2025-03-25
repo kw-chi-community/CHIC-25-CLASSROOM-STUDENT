@@ -21,6 +21,11 @@ const noticeDB = mongoose.createConnection(process.env.MONGO_URI_NOTICE, {
   useUnifiedTopology: true
 });
 
+// "student" 데이터베이스 연결
+const studentDB = mongoose.createConnection(process.env.MONGO_URI_STUDENT, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // 연결 성공 여부 확인
 userDB.on('connected', () => console.log('MongoDB (user) 연결 완료'));
@@ -32,4 +37,7 @@ classDB.on('error', err => console.error('MongoDB (class) 연결 실패:', err))
 noticeDB.on('connected', () => console.log('MongoDB (notice) 연결 완료'));
 noticeDB.on('error', err => console.error('MongoDB (notice) 연결 실패:', err));
 
-module.exports = { userDB, classDB, noticeDB };
+studentDB.on('connected', () => console.log('MongoDB (student) 연결 완료'));
+studentDB.on('error', err => console.error('MongoDB (student) 연결 실패:', err));
+
+module.exports = { studentDB };

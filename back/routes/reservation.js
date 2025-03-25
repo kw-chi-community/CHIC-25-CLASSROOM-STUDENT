@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../db/reservation');
 
+// POST /api/reserve - 예약 생성
 router.post('/reserve', async (req, res) => {
   try {
     const {
@@ -16,10 +17,8 @@ router.post('/reserve', async (req, res) => {
       reservation_confirmed
     } = req.body;
 
-    // Date 객체로 변환 (예: "2025-02-06T00:00:00.000Z" 형태)
     const parsedDate = new Date(reserve_date);
 
-    // 새 문서 생성
     const newReservation = new Reservation({
       reserve_idx,
       class_idx,
@@ -28,7 +27,6 @@ router.post('/reserve', async (req, res) => {
       reserve_date: parsedDate,
       reserve_start_time,
       reserve_end_time,
-      // selectedAt 기본값은 Date.now()
       reservation_confirmed: reservation_confirmed || 0
     });
 
@@ -49,9 +47,10 @@ router.post('/reserve', async (req, res) => {
   }
 });
 
+// GET /api/reserve - 예약 목록 조회
 router.get('/reserve', async (req, res) => {
   try {
-    const reservations = await Reservation.find().sort({ reserve_idx: 1 });
+    const reservations = await Reservation.find().sort({ reserve_idx: 1 }).lean();
     return res.status(200).json({
       code: 200,
       message: "예약 목록 조회 성공",

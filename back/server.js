@@ -13,6 +13,7 @@ const statusRouter = require('./routes/status');
 // 3) 로그인/회원 관리 라우터 (예: /api/login 등)
 const usersRouter = require('./routes/auth');
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -28,7 +29,7 @@ app.use('/api', statusRouter);       // 예: GET /api/status ...
 app.use('/api', usersRouter);        // 예: POST /api/login, GET /api/mypage ...
 
 // 서버 실행
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
