@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const registerUser = require("../handlers/registerUser");
 
-router.post("/", registerUser); // 회원가입 핸들러
+router.post("/signup", registerUser); //엔드포인트 설정
 
 module.exports = router;
