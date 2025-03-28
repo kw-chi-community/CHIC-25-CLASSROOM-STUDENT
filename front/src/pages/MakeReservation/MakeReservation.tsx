@@ -61,7 +61,7 @@ const MakeReservation = () => {
   return (
     <CenteredPageWrapper>
       <form
-        className=" bg-white bg-opacity-50 p-6 w-full max-w-lg shadow-lg rounded-xl space-y-3"
+        className=" bg-white bg-opacity-50 p-6 w-full max-w-lg shadow-lg rounded-xl space-y-3 z-10"
         onSubmit={handleSubmit}
       >
         {/* 날짜 선택 */}

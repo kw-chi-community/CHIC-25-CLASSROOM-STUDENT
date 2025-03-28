@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import PageWrapper from "../../components/PageWrapper";
 
 const NoticePage = () => {
