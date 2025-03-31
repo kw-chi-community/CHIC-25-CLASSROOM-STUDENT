@@ -100,8 +100,18 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
         <div className="flex-grow">
           <Button
             onClick={handleSubmit}
-            text="인증 요청"
-            isActive={!loading && !isVerified && isEmailValid}
+            text={
+              loading
+                ? "전송 중..."
+                : countdown > 0
+                ? `남은 시간: ${Math.floor(countdown / 60)}:${(countdown % 60)
+                    .toString()
+                    .padStart(2, "0")}`
+                : isVerified
+                ? "인증 완료"
+                : "인증 요청"
+            }
+            isActive={!loading && !isVerified && isEmailValid && countdown <= 0}
           />
         </div>
       </div>
