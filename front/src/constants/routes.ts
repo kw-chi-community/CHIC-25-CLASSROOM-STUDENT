@@ -26,17 +26,17 @@ export const ROUTES = {
   MAKE_RESERVATION: {
     path: "/make-reservation",
     element: MakeReservation,
-    title: "예약하기",
+    title: "강의실 사용 예약",
   },
   RESERVATION_STATUS: {
     path: "/reservation-status",
     element: ReservationStatus,
-    title: "예약현황",
+    title: "전체 강의실 사용 현황",
   },
   NOTICE: {
     path: "/notice",
     element: Notice,
-    title: "공지사항",
+    title: "예약 관련 공지",
   },
   MYPAGE: {
     path: "/mypage",
