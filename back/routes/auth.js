@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
       message: "로그인 성공",
       data: {
         accessToken: token,  // ✅ 프론트에서 sessionStorage에 저장
-        id: student.studentId,
+        studentId: student.studentId,
         name: student.name,
         email: student.email,
       },
