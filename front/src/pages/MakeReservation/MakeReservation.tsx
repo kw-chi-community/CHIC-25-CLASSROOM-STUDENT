@@ -167,14 +167,37 @@ const MakeReservation = () => {
         {/* 용도 입력 */}
         <div>
           <label className="block mb-2 font-semibold">
-            용도 입력 (최대 10자)
+            용도 입력 (최대 15자)
           </label>
           <Input
             type="text"
-            maxLength={10}
-            placeholder="예: 세미나"
+            maxLength={15}
+            placeholder="예: 정보융합학부 개강총회"
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
+          />
+        </div>
+
+        {/* 용도 입력 */}
+        <div>
+          <label className="block mb-2 font-semibold">사용 인원</label>
+          <Input
+            type="number"
+            maxLength={10}
+            value={String(participantCount)}
+            onChange={(e) => setParticipantCount(Number(e.target.value))}
+          />
+        </div>
+
+        {/* 담당 교수 입력 */}
+        <div>
+          <label className="block mb-2 font-semibold">담당 교수</label>
+          <Input
+            type="text"
+            maxLength={10}
+            placeholder="담당 교수님 성함을 입력하세요"
+            value={professor}
+            onChange={(e) => setProfessor(e.target.value)}
           />
         </div>
 
