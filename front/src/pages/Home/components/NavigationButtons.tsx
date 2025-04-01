@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 const NavigationButtons = () => {
   const buttons = [
     {
-      to: "/make-reservation",
-      label: "예약하기",
+      to: "/notice",
+      label: "예약 관련 공지",
       icon: (
-        <CalendarPlus size={28} strokeWidth={1.5} className="mb-1 text-black" />
+        <Megaphone size={28} strokeWidth={1.5} className="mb-1 text-black" />
       ),
     },
     {
       to: "/reservation-status",
-      label: "강의실 시간표",
+      label: "전체 강의실 사용 현황",
       icon: (
         <ClipboardList
           size={28}
@@ -22,10 +22,10 @@ const NavigationButtons = () => {
       ),
     },
     {
-      to: "/notice",
-      label: "공지사항",
+      to: "/make-reservation",
+      label: "강의실 사용 예약",
       icon: (
-        <Megaphone size={28} strokeWidth={1.5} className="mb-1 text-black" />
+        <CalendarPlus size={28} strokeWidth={1.5} className="mb-1 text-black" />
       ),
     },
     {
