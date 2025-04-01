@@ -90,7 +90,7 @@ const SignUp = () => {
 
   return (
     <CenteredPageWrapper>
-      <div className="relative w-full max-w-lg text-left">
+      <div className="relative w-full max-w-lg text-left z-10">
         <div className="mt-10 space-y-6">
           {/* 이메일 인증 */}
           <EmailVerification
