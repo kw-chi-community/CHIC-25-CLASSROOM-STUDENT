@@ -1,18 +1,59 @@
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import CenteredPageWrapper from "../../components/CenteredPageWrapper";
+import { createReservation } from "../../api/make-reservation/createReservation";
+import { fetchRoomsbyBuilding } from "../../api/make-reservation/fetchRoomsbyBuilding";
 
 const MakeReservation = () => {
   const [date, setDate] = useState("");
   const [building, setBuilding] = useState("");
+  const [roomOptions, setRoomOptions] = useState<string[]>([]);
   const [room, setRoom] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [purpose, setPurpose] = useState("");
+  const [professor, setProfessor] = useState("");
+  const [participantCount, setParticipantCount] = useState(1);
+
+  const makeReservation = async () => {
+    try {
+      await createReservation({
+        date,
+        building,
+        room,
+        startTime,
+        endTime,
+        purpose,
+        professor,
+        participantCount,
+      });
+      alert("예약이 완료되었습니다!");
+    } catch (error) {
+      console.error("예약에 실패했습니다.", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchRoomOptions = async () => {
+      if (building) {
+        try {
+          const rooms = await fetchRoomsbyBuilding(building);
+          setRoomOptions(rooms);
+        } catch (error) {
+          console.error(
+            "건물에 대한 강의실을 가져오는 데 실패했습니다.",
+            error
+          );
+        }
+      } else {
+        setRoomOptions([]);
+      }
+    };
+
+    fetchRoomOptions();
+  }, [building]);
 
   // 30분 단위 시간 옵션 생성
   const generateTimeOptions = () => {
@@ -54,8 +95,7 @@ const MakeReservation = () => {
       alert("종료 시간은 시작 시간보다 늦어야 합니다.");
       return;
     }
-
-    alert("예약이 완료되었습니다!");
+    makeReservation();
   };
 
   return (
@@ -82,15 +122,13 @@ const MakeReservation = () => {
               <Select
                 options={[
                   "건물",
-                  "복지관",
+                  "기념관",
+                  "누리관",
                   "비마관",
                   "새빛관",
-                  "연구관",
-                  "옥의관",
                   "참빛관",
                   "한울관",
                   "화도관",
-                  "80주년 기념관",
                 ]}
                 value={building}
                 onChange={(e) => setBuilding(e.target.value)}
@@ -98,7 +136,7 @@ const MakeReservation = () => {
             </div>
             <div className="flex-1">
               <Select
-                options={["강의실", "103호", "104호", "205호", "715호"]}
+                options={["강의실", ...roomOptions]}
                 value={room}
                 onChange={(e) => setRoom(e.target.value)}
               />
