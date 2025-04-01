@@ -18,7 +18,7 @@ const MainHeader = () => {
       <button
         onClick={handleLogout}
         aria-label="로그아웃"
-        className="text-gray-700 hover:text-blue-500 font-semibold text-sm"
+        className="text-gray-700 border border-1 border-gray px-3 py-1 rounded-lg text-darkgray hover:border-purple hover:text-purple font-semibold text-sm transition-all duration-300 ease-in-out"
       >
         로그아웃
       </button>
