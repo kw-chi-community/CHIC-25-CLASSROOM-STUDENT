@@ -4,7 +4,7 @@ import { fetchReservationNoticesDto } from "../../../api/notice/dto/fetchReserva
 import { Link } from "react-router-dom";
 const ReservationNotice = () => {
   const [notices, setNotices] = useState<fetchReservationNoticesDto[]>([]); // 공지 데이터를 저장할 상태
-  const [loading, setLoading] = useState(true); // 데이터 로딩 상태
+  const [loading, setLoading] = useState<boolean>(true); // 데이터 로딩 상태
   const [error, setError] = useState<string | null>(null); // 에러 상태, 문자열 또는 null
   useEffect(() => {
     const getNotices = async () => {
