@@ -9,7 +9,7 @@ import { fetchRoomInfo } from "../../api/make-reservation/fetchRoomInfo";
 import { fetchTimeList } from "../../api/make-reservation/fetchTimeList";
 import fetchRoomInfoDto from "../../api/make-reservation/dto/fetchRoomInfoDto";
 import fetchTimeListDto from "../../api/make-reservation/dto/fetchTimeListDto";
-import { Users, Wrench, Building2, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 
 const MakeReservation = () => {
   const [date, setDate] = useState("");
