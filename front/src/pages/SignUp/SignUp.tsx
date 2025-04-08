@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signup } from "./api/signup";
-import { checkIdAvailability } from "./api/checkIdAvailability";
+import { signup } from "../../api/signup/signup";
+import { checkIdAvailability } from "../../api/signup/checkIdAvailability";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import EmailVerification from "./components/EmailVerification";
-import CenteredPageWrapper from "../../components/PageWrapper/CenteredPageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -15,6 +15,8 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [studentId, setStudentId] = useState<string>("");
   const [name, setName] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+
   const [password1, setPassword1] = useState<string>("");
   const [password2, setPassword2] = useState<string>("");
 
@@ -65,7 +67,8 @@ const SignUp = () => {
         studentId,
         name,
         password: password1,
-        otp, // ✅ 인증번호 함께 전달
+        phoneNumber,
+        otp,
       });
       alert("회원가입 성공!");
       navigate("/login");
@@ -89,7 +92,7 @@ const SignUp = () => {
   };
 
   return (
-    <CenteredPageWrapper>
+    <PageWrapper>
       <div className="relative w-full max-w-lg text-left z-10">
         <div className="mt-10 space-y-6">
           {/* 이메일 인증 */}
@@ -120,7 +123,7 @@ const SignUp = () => {
             </div>
           </div>
           {userIdError && (
-            <p className="text-red-500 text-sm mt-2 text-left">{userIdError}</p>
+            <p className="text-red text-sm mt-2 text-left">{userIdError}</p>
           )}
 
           {/* 이름 입력 */}
@@ -131,6 +134,19 @@ const SignUp = () => {
             onChange={(e) => setName(e.target.value)}
           />
 
+          {/* 전화번호 입력 */}
+          <div>
+            <Input
+              type="text"
+              placeholder="전화번호를 입력하세요 (010-0000-0000)"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+            <p className="text-purple">
+              * 예약 관련 안내를 위해 정확한 휴대폰 번호를 입력해주세요.
+            </p>
+          </div>
+
           {/* 비밀번호 입력 */}
           <Input
             type="password"
@@ -139,18 +155,18 @@ const SignUp = () => {
             onChange={(e) => setPassword1(e.target.value)}
             onBlur={handlePasswordBlur}
           />
-          <Input
-            type="password"
-            placeholder="비밀번호 다시 입력해주세요"
-            value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
-            onBlur={handlePasswordBlur}
-          />
-          {!isPasswordMatch && (
-            <p className="text-red-500 text-sm mt-2 text-left">
-              비밀번호가 일치하지 않습니다.
-            </p>
-          )}
+          <div>
+            <Input
+              type="password"
+              placeholder="비밀번호 다시 입력해주세요"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
+              onBlur={handlePasswordBlur}
+            />
+            {!isPasswordMatch && (
+              <p className="text-red">비밀번호가 일치하지 않습니다.</p>
+            )}
+          </div>
 
           {/* 회원가입 버튼 */}
           <Button
@@ -160,7 +176,7 @@ const SignUp = () => {
           />
         </div>
       </div>
-    </CenteredPageWrapper>
+    </PageWrapper>
   );
 };
 

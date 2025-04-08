@@ -115,7 +115,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
           />
         </div>
       </div>
-      {emailMsg && <p className="text-red-500">{emailMsg}</p>}
+      {emailMsg && <p className="text-red">{emailMsg}</p>}
 
       {/* 인증번호 입력 + 확인 버튼 */}
       {countdown > 0 && !isVerified && (
@@ -138,7 +138,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
           </div>
         </div>
       )}
-      {authMsg && <p className="text-red-500">{authMsg}</p>}
+      {authMsg && <p className="text-red">{authMsg}</p>}
     </div>
   );
 };

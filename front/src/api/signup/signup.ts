@@ -1,17 +1,11 @@
-interface SignupData {
-  email: string;
-  studentId: string;
-  name: string;
-  password: string;
-  otp: string; // ✅ 추가!
-}
+import signupDto from "./dto/signupDto";
 
 interface SignupResponse {
   accessToken: string;
   id: string;
 }
 
-export const signup = async (data: SignupData): Promise<SignupResponse> => {
+export const signup = async (data: signupDto): Promise<SignupResponse> => {
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/signup`, {
       method: "POST",
@@ -20,10 +14,11 @@ export const signup = async (data: SignupData): Promise<SignupResponse> => {
       },
       body: JSON.stringify({
         email: data.email,
-        studentId: data.studentId, // ✅ 수정!
+        studentId: data.studentId,
         name: data.name,
         password: data.password,
-        otp: data.otp, // ✅ 그대로 사용 가능
+        phoneNumber: data.phoneNumber,
+        otp: data.otp,
       }),
     });
 
