@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
-import CenteredPageWrapper from "../../components/CenteredPageWrapper";
+import CenteredPageWrapper from "../../components/PageWrapper/CenteredPageWrapper";
 import { createReservation } from "../../api/make-reservation/createReservation";
 import { fetchRoomsbyBuilding } from "../../api/make-reservation/fetchRoomsbyBuilding";
 import { fetchRoomInfo } from "../../api/make-reservation/fetchRoomInfo";
@@ -30,6 +30,25 @@ const MakeReservation = () => {
     contactNumber: "",
   });
   const [timeList, setTimeList] = useState<fetchTimeListDto[]>([]);
+
+  const now = new Date();
+  const isAfter5PM = now.getHours() >= 17;
+
+  // 예약 가능한 시작일: 내일(5시 전) 또는 모레(5시 이후)
+  const minReservationDate = new Date();
+  minReservationDate.setDate(
+    minReservationDate.getDate() + (isAfter5PM ? 2 : 1)
+  );
+
+  // 예약 가능한 종료일: 시작일 기준 +13일 (총 2주 범위)
+  const maxReservationDate = new Date(minReservationDate);
+  maxReservationDate.setDate(minReservationDate.getDate() + 13);
+
+  const formatDate = (date: Date) => date.toISOString().split("T")[0]; // yyyy-mm-dd 형태로 변환
+
+  useEffect(() => {
+    setDate(formatDate(minReservationDate));
+  }, []);
 
   const makeReservation = async () => {
     try {
@@ -188,15 +207,18 @@ const MakeReservation = () => {
   return (
     <CenteredPageWrapper>
       <form
-        className=" bg-white bg-opacity-50 p-6 w-full max-w-lg shadow-lg rounded-xl space-y-3 z-10"
+        className="bg-white bg-opacity-50 p-6 w-full max-w-lg shadow-lg rounded-xl space-y-3 z-10"
         onSubmit={handleSubmit}
       >
         {/* 날짜 선택 */}
         <div>
           <label className="block mb-2 font-semibold">예약 날짜</label>
+
           <Input
             type="date"
             value={date}
+            min={formatDate(minReservationDate)}
+            max={formatDate(maxReservationDate)}
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
@@ -331,12 +353,13 @@ const MakeReservation = () => {
             value={String(participantCount)}
             onChange={(e) => setParticipantCount(Number(e.target.value))}
           />
-          {roomInfo.minNumberOfUsers > 0 ??
-          participantCount < (roomInfo.minNumberOfUsers ?? Infinity) ? (
-            <p className="text-red text-sm">
-              {roomInfo.minNumberOfUsers}명 이상만 사용할 수 있는 강의실입니다.
-            </p>
-          ) : null}
+          {roomInfo.minNumberOfUsers &&
+            participantCount < roomInfo.minNumberOfUsers && (
+              <p className="text-red text-sm">
+                {roomInfo.minNumberOfUsers}명 이상만 사용할 수 있는
+                강의실입니다.
+              </p>
+            )}
         </div>
 
         {/* 담당 교수 입력 */}
