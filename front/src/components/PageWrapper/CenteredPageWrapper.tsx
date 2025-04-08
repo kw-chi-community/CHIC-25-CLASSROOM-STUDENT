@@ -10,7 +10,7 @@ const CenteredPageWrapper = ({ children }: PageWrapperProps) => {
     <div className="relative h-screen">
       <BackgroundBlur />
       <div className="absolute top-[52px] left-0 right-0 bottom-0 overflow-y-auto">
-        <div className="flex flex-col items-center justify-start min-h-full p-8">
+        <div className="flex flex-col items-center justify-center min-h-full p-8">
           {children}
         </div>
       </div>
