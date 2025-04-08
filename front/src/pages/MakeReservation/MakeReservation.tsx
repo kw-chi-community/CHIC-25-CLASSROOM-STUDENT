@@ -5,10 +5,11 @@ import Select from "../../components/Select";
 import CenteredPageWrapper from "../../components/CenteredPageWrapper";
 import { createReservation } from "../../api/make-reservation/createReservation";
 import { fetchRoomsbyBuilding } from "../../api/make-reservation/fetchRoomsbyBuilding";
-import fetchRoomInfoDto from "../../api/make-reservation/dto/fetchRoomInfoDto";
 import { fetchRoomInfo } from "../../api/make-reservation/fetchRoomInfo";
 import { fetchTimeList } from "../../api/make-reservation/fetchTimeList";
+import fetchRoomInfoDto from "../../api/make-reservation/dto/fetchRoomInfoDto";
 import fetchTimeListDto from "../../api/make-reservation/dto/fetchTimeListDto";
+import { Users, Wrench, Building2, MapPin, Phone } from "lucide-react";
 
 const MakeReservation = () => {
   const [date, setDate] = useState("");
@@ -186,6 +187,46 @@ const MakeReservation = () => {
             </div>
           </div>
         </div>
+
+        {building && room && (
+          <div className="mt-4 p-4 bg-white/50 border border-gray rounded-lg text-black">
+            <p className="font-semibold mb-4 text-center tracking-wide border-b border-gray pb-2">
+              {building} {room} 정보
+            </p>
+            <ul className="space-y-2">
+              <li>
+                {roomInfo.equipment.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    {roomInfo.equipment.map((eq, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-skyblue rounded-full text-sm font-medium"
+                      >
+                        # {eq}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </li>
+              <li>
+                <strong>최소 인원:</strong>{" "}
+                {roomInfo.minNumberOfUsers ?? "제한 없음"}
+              </li>
+              <li>
+                <strong>관리 부서:</strong> {roomInfo.contactDepartment}
+                <br />
+                <p className="ml-16">
+                  <MapPin size={14} className="inline mr-1 text-gray-500" />
+                  {roomInfo.contactLocation}
+                </p>
+                <p className="ml-16">
+                  <Phone size={14} className="inline mr-1 text-gray-500" />
+                  {roomInfo.contactNumber}
+                </p>
+              </li>
+            </ul>
+          </div>
+        )}
 
         {/* 시작 시간 선택 */}
         <div>
