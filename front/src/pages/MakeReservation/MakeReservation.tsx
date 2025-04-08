@@ -99,16 +99,55 @@ const MakeReservation = () => {
     fetchRoom();
   }, [building, room]);
 
-  // 30분 단위 시간 옵션 생성
-  const generateTimeOptions = () => {
-    const options = [];
+  // 30분 단위 시간 옵션 생성 + 예약불가 시간 제거
+  const generateStartTimeOptions = () => {
+    const options: { value: string; disabled: boolean }[] = [];
+
     for (let hour = 9; hour <= 22; hour++) {
-      options.push(`${hour}:00`, `${hour}:30`);
+      ["00", "30"].forEach((minute) => {
+        const time = `${hour.toString().padStart(2, "0")}:${minute}`;
+
+        // 예약 불가능 시간대인지 확인
+        const isUnavailable = timeList.some(({ startTime, endTime }) => {
+          return (
+            new Date(`2000-01-01T${time}:00`) >=
+              new Date(`2000-01-01T${startTime}:00`) &&
+            new Date(`2000-01-01T${time}:00`) <
+              new Date(`2000-01-01T${endTime}:00`)
+          );
+        });
+
+        options.push({ value: time, disabled: isUnavailable });
+      });
     }
+
     return options;
   };
 
-  const timeOptions = generateTimeOptions();
+  const generateEndTimeOptions = (start: string) => {
+    const options: { value: string; disabled: boolean }[] = [];
+    const startTimeObj = new Date(`2000-01-01T${start}:00`);
+
+    // start 이후의 예약 중 가장 빠른 예약 시작 시간 찾기
+    const nextReservationStart = timeList
+      .map(({ startTime }) => new Date(`2000-01-01T${startTime}:00`))
+      .filter((resStart) => resStart > startTimeObj)
+      .sort((a, b) => a.getTime() - b.getTime())[0]; // 가장 빠른 예약
+
+    for (let hour = 9; hour <= 22; hour++) {
+      ["00", "30"].forEach((minute) => {
+        const timeStr = `${hour.toString().padStart(2, "0")}:${minute}`;
+        const currentTime = new Date(`2000-01-01T${timeStr}:00`);
+
+        if (currentTime <= startTimeObj) return;
+        if (nextReservationStart && currentTime > nextReservationStart) return;
+
+        options.push({ value: timeStr, disabled: false });
+      });
+    }
+
+    return options;
+  };
 
   const isFormValid = Boolean(
     date &&
@@ -232,7 +271,7 @@ const MakeReservation = () => {
         <div>
           <label className="block mb-2 font-semibold">시작 시간</label>
           <Select
-            options={["시작 시간", ...timeOptions]}
+            options={["시작 시간", ...generateStartTimeOptions()]}
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
           />
@@ -242,7 +281,10 @@ const MakeReservation = () => {
         <div>
           <label className="block mb-2 font-semibold">종료 시간</label>
           <Select
-            options={["종료 시간", ...timeOptions]}
+            options={[
+              "종료 시간",
+              ...(startTime ? generateEndTimeOptions(startTime) : []),
+            ]}
             value={endTime}
             onChange={(e) => setEndTime(e.target.value)}
           />
