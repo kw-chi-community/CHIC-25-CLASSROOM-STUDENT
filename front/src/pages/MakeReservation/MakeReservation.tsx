@@ -353,7 +353,8 @@ const MakeReservation = () => {
             value={String(participantCount)}
             onChange={(e) => setParticipantCount(Number(e.target.value))}
           />
-          {roomInfo.minNumberOfUsers &&
+          {roomInfo.minNumberOfUsers != null &&
+            roomInfo.minNumberOfUsers > 0 &&
             participantCount < roomInfo.minNumberOfUsers && (
               <p className="text-red text-sm">
                 {roomInfo.minNumberOfUsers}명 이상만 사용할 수 있는
