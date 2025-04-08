@@ -3,9 +3,9 @@ const Student = require("../db/student");
 const { otpStorage } = require("./sendEmail"); // OTP 저장소 사용
 
 const handler = async (req, res) => {
-  const { studentId, email, name, password, otp } = req.body;
+  const { studentId, email, name, password, phoneNumber, otp } = req.body;
 
-  if (!studentId || !email || !name || !password || !otp) {
+  if (!studentId || !email || !name || !password || !phoneNumber || !otp) {
     return res.status(400).json({ ok: false, message: "모든 필드를 입력해주세요." });
   }
 
@@ -29,6 +29,7 @@ const handler = async (req, res) => {
     email,
     name,
     password: hashedPassword,
+    phoneNumber
   });
 
   await newStudent.save();
