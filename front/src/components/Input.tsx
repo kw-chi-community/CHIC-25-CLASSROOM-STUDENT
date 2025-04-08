@@ -7,6 +7,8 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   maxLength?: number;
+  min?: string;
+  max?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +18,8 @@ const Input: React.FC<InputProps> = ({
   onChange,
   onBlur,
   maxLength,
+  min,
+  max,
 }) => {
   return (
     <input
@@ -25,6 +29,8 @@ const Input: React.FC<InputProps> = ({
       onChange={onChange}
       onBlur={onBlur}
       maxLength={maxLength}
+      min={min}
+      max={max}
       className="w-full p-2 mb-2 border border-gray rounded-xl bg-skyblue text-gray-700 focus:ring-2 focus:ring-lightpurple focus:outline-none text-lg transition-all"
     />
   );

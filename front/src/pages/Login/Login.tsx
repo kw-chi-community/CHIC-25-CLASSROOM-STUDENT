@@ -4,7 +4,7 @@ import { login } from "./api/login";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../context/AuthContext";
-import CenteredPageWrapper from "../../components/CenteredPageWrapper";
+import CenteredPageWrapper from "../../components/PageWrapper/CenteredPageWrapper";
 
 const Login = () => {
   const { setUser } = useAuth();
