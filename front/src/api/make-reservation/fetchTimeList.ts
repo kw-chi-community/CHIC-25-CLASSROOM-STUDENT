@@ -1,3 +1,5 @@
+import fetchTimeListDto from "./dto/fetchTimeListDto";
+
 export const fetchTimeList = async (building: string, room: string) => {
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
@@ -15,9 +17,9 @@ export const fetchTimeList = async (building: string, room: string) => {
       throw new Error("데이터를 가져오는 데 실패했습니다.");
     }
 
-    const data = await response.json();
+    const data: fetchTimeListDto[] = await response.json();
 
-    return data; // room 배열 리턴
+    return data;
   } catch (error) {
     console.error("Failed to fetch reservation notices:", error);
     throw error;

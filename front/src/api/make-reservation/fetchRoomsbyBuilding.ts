@@ -1,3 +1,5 @@
+import { fetchRoomsbyBuildingDto } from "./dto/fetchRoomsbyBuildingDto";
+
 export const fetchRoomsbyBuilding = async (building: string) => {
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
@@ -15,7 +17,7 @@ export const fetchRoomsbyBuilding = async (building: string) => {
       throw new Error("데이터를 가져오는 데 실패했습니다.");
     }
 
-    const data = await response.json();
+    const data: fetchRoomsbyBuildingDto[] = await response.json();
 
     // data에서 room만 추출하여 배열로 리턴
     const rooms = data.map(
