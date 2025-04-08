@@ -8,7 +8,7 @@ import { fetchTimeList } from "../../api/make-reservation/fetchTimeList";
 import fetchRoomInfoDto from "../../api/make-reservation/dto/fetchRoomInfoDto";
 import fetchTimeListDto from "../../api/make-reservation/dto/fetchTimeListDto";
 
-// 분리된 컴포넌트 import
+// TODO: 입장하면 항상 공지 관련 팝업(예약은 2주 전에 오픈, 이용일 이전 5시 전까지만 예약 가능) 띄우고, 읽었습니다 체크박스를 눌러야 해당 페이지가 보이도록 하기!!
 import DateSelector from "./components/DateSelector";
 import BuildingRoomSelector from "./components/BuildingRoomSelector";
 import StartTimeSelector from "./components/StartTimeSelector";
