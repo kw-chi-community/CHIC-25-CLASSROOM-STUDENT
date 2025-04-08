@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchMyPageData } from "./api/fetchMyPageData";
 import { MyPageDto } from "./MyPageDto";
-import PageWrapper from "../../components/PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const MyPage: React.FC = () => {
   const [userData, setUserData] = useState<MyPageDto | null>(null);

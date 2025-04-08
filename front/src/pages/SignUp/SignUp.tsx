@@ -5,7 +5,7 @@ import { checkIdAvailability } from "./api/checkIdAvailability";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import EmailVerification from "./components/EmailVerification";
-import CenteredPageWrapper from "../../components/CenteredPageWrapper";
+import CenteredPageWrapper from "../../components/PageWrapper/CenteredPageWrapper";
 
 const SignUp = () => {
   const navigate = useNavigate();

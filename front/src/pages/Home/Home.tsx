@@ -1,5 +1,5 @@
 "use client";
-import PageWrapper from "../../components/PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import NavigationButtons from "./components/NavigationButtons";
 import ReservationNotice from "./components/ReservationNotice";
 import UpcomingReservations from "./components/UpcomingReservations";
@@ -7,7 +7,7 @@ import UpcomingReservations from "./components/UpcomingReservations";
 const Home = () => {
   return (
     <PageWrapper>
-      <div className="space-y-10 w-full max-w-lg mx-auto mt-6 z-10">
+      <div className="space-y-10 w-full max-w-lg mx-auto z-10">
         {/* 상단 네비 버튼 */}
         <NavigationButtons />
 

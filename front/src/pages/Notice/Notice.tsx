@@ -1,4 +1,4 @@
-import PageWrapper from "../../components/PageWrapper";
+import PageWrapper from "../../components/PageWrapper/PageWrapper";
 
 const NoticePage = () => {
   return <PageWrapper>공지사항</PageWrapper>;
