@@ -14,13 +14,14 @@ import { MapPin, Phone } from "lucide-react";
 const MakeReservation = () => {
   const [date, setDate] = useState("");
   const [building, setBuilding] = useState("");
-  const [roomOptions, setRoomOptions] = useState<string[]>([]);
   const [room, setRoom] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [purpose, setPurpose] = useState("");
-  const [professor, setProfessor] = useState("");
   const [participantCount, setParticipantCount] = useState(1);
+  const [professor, setProfessor] = useState("");
+
+  const [roomOptions, setRoomOptions] = useState<string[]>([]);
   const [roomInfo, setRoomInfo] = useState<fetchRoomInfoDto>({
     equipment: [],
     minNumberOfUsers: 0,
@@ -39,11 +40,11 @@ const MakeReservation = () => {
         startTime,
         endTime,
         purpose,
-        professor,
         participantCount,
+        professor,
       });
       alert("예약이 완료되었습니다!");
-      // TODO: reservationId을 사용하여 예약 상세 페이지로 이동하기
+      // TODO: reservationId을 사용하여 예약 상세 팝업 띄우기
     } catch (error) {
       console.error("예약에 실패했습니다.", error);
     }
@@ -151,12 +152,15 @@ const MakeReservation = () => {
 
   const isFormValid = Boolean(
     date &&
-      startTime &&
-      endTime &&
       building &&
       room &&
+      startTime &&
+      endTime &&
       purpose.length > 0 &&
-      purpose.length <= 10
+      purpose.length <= 15 &&
+      participantCount > 0 &&
+      participantCount >= (roomInfo.minNumberOfUsers || 0) &&
+      professor
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -214,7 +218,21 @@ const MakeReservation = () => {
                   "화도관",
                 ]}
                 value={building}
-                onChange={(e) => setBuilding(e.target.value)}
+                onChange={(e) => {
+                  const selectedBuilding = e.target.value;
+                  setBuilding(selectedBuilding);
+                  setRoom("");
+                  setRoomInfo({
+                    equipment: [],
+                    minNumberOfUsers: 0,
+                    contactDepartment: "",
+                    contactLocation: "",
+                    contactNumber: "",
+                  });
+                  setStartTime("");
+                  setEndTime("");
+                  setTimeList([]);
+                }}
               />
             </div>
             <div className="flex-1">
@@ -313,6 +331,12 @@ const MakeReservation = () => {
             value={String(participantCount)}
             onChange={(e) => setParticipantCount(Number(e.target.value))}
           />
+          {roomInfo.minNumberOfUsers > 0 ??
+          participantCount < (roomInfo.minNumberOfUsers ?? Infinity) ? (
+            <p className="text-red text-sm">
+              {roomInfo.minNumberOfUsers}명 이상만 사용할 수 있는 강의실입니다.
+            </p>
+          ) : null}
         </div>
 
         {/* 담당 교수 입력 */}
