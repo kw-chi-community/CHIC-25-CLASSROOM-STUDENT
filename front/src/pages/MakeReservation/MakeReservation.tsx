@@ -19,7 +19,7 @@ const MakeReservation = () => {
 
   const makeReservation = async () => {
     try {
-      await createReservation({
+      const { reservationId } = await createReservation({
         date,
         building,
         room,
@@ -30,6 +30,7 @@ const MakeReservation = () => {
         participantCount,
       });
       alert("예약이 완료되었습니다!");
+      // TODO: reservationId을 사용하여 예약 상세 페이지로 이동하기
     } catch (error) {
       console.error("예약에 실패했습니다.", error);
     }

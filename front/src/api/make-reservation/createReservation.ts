@@ -17,7 +17,7 @@ export const createReservation = async (data: createReservationDto) => {
       participantCount: data.participantCount,
     };
 
-    const response = await fetch("/api/reservation-list", {
+    const response = await fetch("/api/make-reservation", {
       method: "POST", // POST 요청 사용
       headers: {
         "Content-Type": "application/json", // 요청 본문이 JSON 형식임을 명시
@@ -31,7 +31,7 @@ export const createReservation = async (data: createReservationDto) => {
     }
 
     const responseData = await response.json(); // JSON 형태로 응답 데이터 파싱
-    return responseData;
+    return responseData.reservationId; // 예약 ID 반환
   } catch (error) {
     console.error("Failed to fetch reservation notices:", error);
     throw error; // 오류 발생 시 오류를 던짐
