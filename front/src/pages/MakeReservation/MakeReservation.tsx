@@ -5,6 +5,10 @@ import Select from "../../components/Select";
 import CenteredPageWrapper from "../../components/CenteredPageWrapper";
 import { createReservation } from "../../api/make-reservation/createReservation";
 import { fetchRoomsbyBuilding } from "../../api/make-reservation/fetchRoomsbyBuilding";
+import fetchRoomInfoDto from "../../api/make-reservation/dto/fetchRoomInfoDto";
+import { fetchRoomInfo } from "../../api/make-reservation/fetchRoomInfo";
+import { fetchTimeList } from "../../api/make-reservation/fetchTimeList";
+import fetchTimeListDto from "../../api/make-reservation/dto/fetchTimeListDto";
 
 const MakeReservation = () => {
   const [date, setDate] = useState("");
@@ -16,6 +20,14 @@ const MakeReservation = () => {
   const [purpose, setPurpose] = useState("");
   const [professor, setProfessor] = useState("");
   const [participantCount, setParticipantCount] = useState(1);
+  const [roomInfo, setRoomInfo] = useState<fetchRoomInfoDto>({
+    equipment: [],
+    minNumberOfUsers: 0,
+    contactDepartment: "",
+    contactLocation: "",
+    contactNumber: "",
+  });
+  const [timeList, setTimeList] = useState<fetchTimeListDto[]>([]);
 
   const makeReservation = async () => {
     try {
@@ -55,6 +67,36 @@ const MakeReservation = () => {
 
     fetchRoomOptions();
   }, [building]);
+
+  useEffect(() => {
+    const fetchRoom = async () => {
+      if (building && room) {
+        try {
+          const roomInfo = await fetchRoomInfo(building, room);
+          const timeList = await fetchTimeList(building, room);
+
+          setRoomInfo(roomInfo);
+          setTimeList(timeList);
+        } catch (error) {
+          console.error(
+            "건물에 대한 정보 및 예약/강의 시간 목록을 가져오는 데 실패했습니다.",
+            error
+          );
+        }
+      } else {
+        setRoomInfo({
+          equipment: [],
+          minNumberOfUsers: 0,
+          contactDepartment: "",
+          contactLocation: "",
+          contactNumber: "",
+        });
+        setTimeList([]);
+      }
+    };
+
+    fetchRoom();
+  }, [building, room]);
 
   // 30분 단위 시간 옵션 생성
   const generateTimeOptions = () => {
