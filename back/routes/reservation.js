@@ -11,6 +11,20 @@ const getDayField = (dateStr) => {
   return days[new Date(dateStr).getDay()];
 };
 
+const buildingMap = {
+  "복지관": "복",
+  "비마관": "비",
+  "새빛관": "새빛",
+  "연구관": "연",
+  "옥의관": "옥",
+  "참빛관": "참",
+  "한울관": "한울",
+  "화도관": "화",
+  "80주년 기념관": "기",
+  "미지정": null,
+  "": null
+};
+
 // POST /api/reserve/check-time
 router.post("/reserve/check-time", async (req, res) => {
   try {
@@ -23,9 +37,12 @@ router.post("/reserve/check-time", async (req, res) => {
 
     // 1️⃣ 예약 정보 조회
     const reservationResults = await Reserve.find({
-      reserve_date: new Date(date),
+      reserve_date: {
+        $gte: new Date(date + "T00:00:00.000Z"),
+        $lt: new Date(date + "T23:59:59.999Z")
+      },
       reserve_title: building,
-      class_idx: room
+      classroom_idx: room
     }).toArray();
 
     const reservationTimes = reservationResults.map(r => ({
@@ -34,17 +51,22 @@ router.post("/reserve/check-time", async (req, res) => {
     }));
 
     // 2️⃣ 수업 정보 조회
-    const lectureQuery = {
-      classroom_idx: room,
-      [`week_${weekday}`]: true
-    };
+    const buildingPrefix = buildingMap[building];
+    const computedClassroomIdx = buildingPrefix ? `${buildingPrefix}${room.replace("호", "")}` : null;
+    if (!computedClassroomIdx) {
+      return res.status(400).json({ message: "유효하지 않은 건물명입니다." });
+    }
 
-    const classResults = await Class.find(lectureQuery).toArray();
+    const classResults = await Class.find({
+      classroom_idx: computedClassroomIdx
+    }).toArray();
 
-    const classTimes = classResults.map(cls => ({
-      startTime: cls[`${weekday}_start_time`],
-      endTime: cls[`${weekday}_end_time`]
-    }));
+    const classTimes = classResults
+      .filter(cls => cls[`week_${weekday}`])
+      .map(cls => ({
+        startTime: cls[`${weekday}_start_time`],
+        endTime: cls[`${weekday}_end_time`]
+      }));
 
     // 3️⃣ 합쳐서 응답
     return res.status(200).json([...reservationTimes, ...classTimes]);

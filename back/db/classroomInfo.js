@@ -4,14 +4,13 @@ const { classDB } = require("./mongodb");
 const ClassroomInfoSchema = new mongoose.Schema({
   building: { type: String, required: true },
   room: { type: String, required: true },
-  canReserve: { type: Boolean, default: false },
 
-  // 새 필드 추가
-  equipment: [String],
-  minNumberOfUsers: Number,
-  contactDepartment: String,
-  contactLocation: String,
-  contactNumber: String
+  equipment: [{ type: String }],
+  minNumberOfUsers: { type: Number, default: null },
+  contactDepartment: { type: String },
+  contactLocation: { type: String },
+  contactNumber: { type: String }
+
 }, { versionKey: false });
 
 module.exports = classDB.model("ClassroomInfo", ClassroomInfoSchema, "classroom_info");
