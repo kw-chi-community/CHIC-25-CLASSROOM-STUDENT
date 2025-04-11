@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { classDB } = require("../db/mongodb");
 
-// classroomInfo 컬렉션 참조
+// classroom_info 컬렉션 직접 참조
 const ClassroomInfo = classDB.collection("classroom_info");
 
 router.post("/reserve/classroom-info", async (req, res) => {
@@ -13,9 +13,10 @@ router.post("/reserve/classroom-info", async (req, res) => {
     }
 
     const info = await ClassroomInfo.findOne({
-      building: { $regex: `^${building.trim()}`, $options: "i" },
-      room: { $regex: `^${room.trim()}`, $options: "i" },
+      building: building.trim(),
+      room: room.trim()
     });
+
     if (!info) {
       return res.status(404).json({ message: "해당 강의실 정보를 찾을 수 없습니다." });
     }
