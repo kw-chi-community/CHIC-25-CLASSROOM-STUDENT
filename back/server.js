@@ -23,7 +23,7 @@ app.use('/api', require('./routes/auth'));               // 로그인
 app.use('/api', require('./routes/registerRouter'));     // 회원가입 (POST /api/signup)
 app.use('/api', require('./routes/studentIdRouter'));    // 학번 중복 검사 (POST /api/signup/check-id)
 app.use('/api', require('./routes/sendEmailRouter'));    // 이메일 인증 (POST /api/signup/email)
-app.use('/api', reserveRoomRouter); // ✅ 추가
+app.use('/api/reserve', reserveRoomRouter); // ✅ 변경: POSTMAN 기준으로 경로 맞춤
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
