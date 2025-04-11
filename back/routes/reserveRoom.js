@@ -11,7 +11,13 @@ router.post("/reserve/check-room", async (req, res) => {
   }
 
   try {
-    const rooms = await ClassroomInfo.find({ building });
+    const results = await ClassroomInfo.find({ building }); // Mongoose는 이 자체가 배열
+
+    const rooms = results.map((room) => ({
+      building: room.building,
+      room: room.room
+    }));
+
     return res.status(200).json({ ok: true, rooms });
   } catch (err) {
     console.error("check-room 오류:", err);
