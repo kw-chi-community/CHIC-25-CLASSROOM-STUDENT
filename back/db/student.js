@@ -10,3 +10,4 @@ const StudentSchema = new mongoose.Schema({
 }, { versionKey: false });
  
 module.exports = studentDB.model("Student", StudentSchema);
+

@@ -1,12 +1,17 @@
-export const checkIdAvailability = async (studentId: string): Promise<boolean> => {
+export const checkIdAvailability = async (
+  studentId: string
+): Promise<boolean> => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/signup/check-id`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ studentId }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/signup/check-id`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ studentId }),
+      }
+    );
 
     const responseData = await response.json();
 

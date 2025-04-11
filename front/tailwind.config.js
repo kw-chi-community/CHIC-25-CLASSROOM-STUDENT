@@ -7,6 +7,7 @@ export default {
       white: "#ffffff",
       purple: "#4461F2",
       lightpurple: "#798df3",
+      red: "#ff5e5e",
       skyblue: "#EAF0F7",
       gray: "#DDDFDD",
       black: "#000000",

@@ -4,7 +4,7 @@ import { login } from "./api/login";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../context/AuthContext";
-import CenteredPageWrapper from "../../components/CenteredPageWrapper";
+import CenteredPageWrapper from "../../components/PageWrapper/CenteredPageWrapper";
 
 const Login = () => {
   const { setUser } = useAuth();
@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <CenteredPageWrapper>
-      <div className="relative w-full max-w-lg text-left z-10">
+      <div className="w-full max-w-lg z-10">
         {/* 제목 */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black">
           광운대학교
