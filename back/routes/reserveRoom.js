@@ -10,14 +10,13 @@ router.post("/check-room", async (req, res) => {
 
     const rooms = results.map((room) => ({
       building: room.building,
-      room: room.room
+      room: room.room,
     }));
 
-    return res.status(200).json({ ok: true, rooms });
+    return res.status(200).json(rooms);
   } catch (err) {
     console.error("check-room 오류:", err);
     return res.status(500).json({ ok: false, message: "서버 오류" });
-
   }
 });
 

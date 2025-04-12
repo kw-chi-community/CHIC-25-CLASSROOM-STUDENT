@@ -67,7 +67,7 @@ const MakeReservation = () => {
     if (building && room) {
       Promise.all([
         fetchRoomInfo(building, room),
-        fetchTimeList(building, room),
+        fetchTimeList(date, building, room),
       ])
         .then(([info, time]) => {
           setRoomInfo(info);
@@ -80,7 +80,7 @@ const MakeReservation = () => {
     } else {
       resetRoomData();
     }
-  }, [building, room]);
+  }, [date, building, room]);
 
   const resetRoomData = () => {
     setRoomInfo({
@@ -210,12 +210,12 @@ const MakeReservation = () => {
         <PurposeInput value={purpose} onChange={setPurpose} />
         <ParticipantInput
           value={participantCount}
-          minRequired={roomInfo.minNumberOfUsers}
+          minRequired={roomInfo.minNumberOfUsers ?? undefined}
           onChange={setParticipantCount}
         />
         <ProfessorInput value={professor} onChange={setProfessor} />
         <div className="pt-10">
-          <Button type="submit" text="예약하기" isActive={isFormValid} />
+          <Button type="submit" text="예약하기" isActive={!!isFormValid} />
         </div>
       </form>
     </CenteredPageWrapper>
