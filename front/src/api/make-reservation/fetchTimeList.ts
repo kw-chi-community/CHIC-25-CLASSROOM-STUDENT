@@ -1,6 +1,10 @@
 import fetchTimeListDto from "./dto/fetchTimeListDto";
 
-export const fetchTimeList = async (building: string, room: string) => {
+export const fetchTimeList = async (
+  date: string,
+  building: string,
+  room: string
+) => {
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
 
@@ -10,7 +14,7 @@ export const fetchTimeList = async (building: string, room: string) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ building, room }),
+      body: JSON.stringify({ date, building, room }),
     });
 
     if (!response.ok) {
