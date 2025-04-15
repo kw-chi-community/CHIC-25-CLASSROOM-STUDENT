@@ -49,7 +49,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
   });
   return (
     <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full max-w-lg mt-6 relative z-10">
-      <h2 className="text-xl font-bold text-gray-900">나의 강의실 예약 현황</h2>
+      <h2 className="text-lg font-bold text-gray-900">나의 강의실 예약 현황</h2>
 
       {hasReservations ? (
         sortedReservations.map((reservation, idx) => {
@@ -78,7 +78,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
               className="mt-4 p-4 border border-darkgray rounded-lg cursor-pointer hover:bg-skyblue transition"
               onClick={() => setSelectedId(reservation.id)}
             >
-              <p className="text-lg font-semibold">
+              <p className="text-base font-semibold">
                 {reservation.building} {reservation.room}
               </p>
               <p className="text-base text-gray-600">
