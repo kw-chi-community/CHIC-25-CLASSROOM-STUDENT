@@ -22,6 +22,7 @@ router.post("/reservation-list", async (req, res) => {
       reserve_start_time: r.reserve_start_time,
       reserve_end_time: r.reserve_end_time,
       reservation_confirmed: r.reservation_confirmed,
+      purpose: r.purpose,
     }));
 
     return res.status(200).json(result);
