@@ -9,7 +9,7 @@ interface ProfileCardProps {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ studentId, userData }) => {
   return (
-    <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full max-w-lg text-center relative z-10">
+    <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full text-center relative z-10">
       <h2 className="text-lg font-bold text-gray-900">내 프로필</h2>
       {userData ? (
         <>

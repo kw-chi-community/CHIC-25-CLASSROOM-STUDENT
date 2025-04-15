@@ -48,7 +48,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
     );
   });
   return (
-    <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full max-w-lg mt-6 relative z-10">
+    <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full mt-6 relative z-10">
       <h2 className="text-lg font-bold text-gray-900">나의 강의실 예약 현황</h2>
 
       {hasReservations ? (
