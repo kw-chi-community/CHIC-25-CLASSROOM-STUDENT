@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const reserveRoomRouter = require('./routes/reserveRoom');
+const reservationDetailRoute = require("./routes/reservationDetail");
 
 
 // DB 연결
@@ -26,7 +27,7 @@ app.use('/api', require('./routes/sendEmailRouter'));    // 이메일 인증 (PO
 app.use("/api", require("./routes/classroomInfo"));
 app.use('/api/reserve', reserveRoomRouter); // ✅ 변경: POSTMAN 기준으로 경로 맞춤
 app.use("/api", require("./routes/makereserve"));
-
+app.use("/api", require("./routes/reservationDetail"));
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
