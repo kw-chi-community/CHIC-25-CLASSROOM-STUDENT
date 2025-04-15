@@ -109,7 +109,7 @@ const ReservationDetailPopup = ({
             </li>
           </ul>
           <div className="flex flex-col items-center gap-2 py-5">
-            {!data.reservation_confirmed ? (
+            {data.reservation_confirmed === 0 ? (
               <>
                 <CircleX size={50} strokeWidth={1.5} color="#ff5e5e" />
                 <span className="text-red font-semibold text-lg">
@@ -133,7 +133,7 @@ const ReservationDetailPopup = ({
             )}
           </div>
         </div>
-        {data.reservation_confirmed && !isCompleted && (
+        {data.reservation_confirmed === 1 && !isCompleted && (
           <div className="flex justify-center gap-3">
             <Button text={"예약 변경"} isActive={true} onClick={onEdit} />
             <Button text={"예약 취소"} isActive={true} onClick={onCancel} />

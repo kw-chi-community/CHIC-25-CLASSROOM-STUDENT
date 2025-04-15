@@ -13,6 +13,8 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
   );
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
+  console.log("studentId", studentId);
+
   useEffect(() => {
     if (studentId) {
       fetchReservationList(studentId)
@@ -30,7 +32,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
   const sortedReservations = [...reservations].sort((a, b) => {
     const getStatusWeight = (r: typeof a) => {
       const endTime = new Date(`${r.reserve_date}T${r.reserve_end_time}`);
-      if (!r.reservation_confirmed) return 3; // 반려
+      if (r.reservation_confirmed === 0) return 3; // 반려
       if (endTime < new Date()) return 2; // 이용 완료
       return 1; // 예약 확정
     };
@@ -59,7 +61,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
           let statusText = "";
           let statusClass = "";
 
-          if (!reservation.reservation_confirmed) {
+          if (reservation.reservation_confirmed === 0) {
             statusText = "예약 반려";
             statusClass = "text-red font-semibold";
           } else if (isCompleted) {
