@@ -5,6 +5,8 @@ import Button from "../Button";
 import { fetchReservationDetailDto } from "../../api/mypage/dto/fetchReservationDetailDto";
 import { fetchReservationDetail } from "../../api/mypage/fetchReservationDetail";
 
+// TODO 예약 취소, 변경 api 호출 내용
+
 interface ReservationDetailPopupProps {
   reservationId: string;
   onClose: () => void;
