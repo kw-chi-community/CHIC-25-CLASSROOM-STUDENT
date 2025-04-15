@@ -15,7 +15,7 @@ const BackHeader = () => {
   );
 
   return (
-    <header className="h-[52px] fixed top-0 left-0 right-0 mx-auto w-full max-w-[600px] backdrop-blur-lg p-4 flex items-center justify-between z-50">
+    <header className="h-[52px] fixed top-0 left-0 right-0 mx-auto w-full max-w-[600px] backdrop-blur-lg p-4 flex items-center justify-between z-30">
       {/* 뒤로가기 버튼 */}
       <button
         onClick={handleBack}
