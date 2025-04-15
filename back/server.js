@@ -25,6 +25,7 @@ app.use('/api', require('./routes/studentIdRouter'));    // 학번 중복 검사
 app.use('/api', require('./routes/sendEmailRouter'));    // 이메일 인증 (POST /api/signup/email)
 app.use("/api", require("./routes/classroomInfo"));
 app.use('/api/reserve', reserveRoomRouter); // ✅ 변경: POSTMAN 기준으로 경로 맞춤
+app.use("/api", require("./routes/makereserve"));
 
 
 // 서버 실행
