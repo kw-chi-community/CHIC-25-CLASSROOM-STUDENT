@@ -24,7 +24,7 @@ router.get("/reservation-detail", async (req, res) => {
 
     return res.status(200).json({
       id: reservation._id,
-      reserve_date: reservation.reserve_date,
+      reserve_date: new Date(reservation.reserve_date).toISOString().slice(0, 10),
       reserve_start_time: reservation.reserve_start_time,
       reserve_end_time: reservation.reserve_end_time,
       student_id: reservation.student_id,

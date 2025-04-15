@@ -28,6 +28,7 @@ app.use("/api", require("./routes/classroomInfo"));
 app.use('/api/reserve', reserveRoomRouter); // ✅ 변경: POSTMAN 기준으로 경로 맞춤
 app.use("/api", require("./routes/makereserve"));
 app.use("/api", require("./routes/reservationDetail"));
+app.use("/api", require("./routes/reservationList"));
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
