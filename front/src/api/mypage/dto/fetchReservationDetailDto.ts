@@ -7,6 +7,7 @@ export interface fetchReservationDetailDto {
   reserve_reason: string;
   building: string;
   room: string;
+  reservation_confirmed: number;
   equipment: string[];
   contactDepartment: string;
   contactLocation: string;
