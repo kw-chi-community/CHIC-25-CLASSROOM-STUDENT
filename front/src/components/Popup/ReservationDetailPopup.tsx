@@ -29,7 +29,7 @@ const ReservationDetailPopup = ({
   onEdit,
 }: ReservationDetailPopupProps) => {
   const [data, setData] = useState<fetchReservationDetailDto | null>(null);
-
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   useEffect(() => {
     if (reservationId) {
       fetchReservationDetail(reservationId)
@@ -39,6 +39,12 @@ const ReservationDetailPopup = ({
       setData(null);
     }
   }, [reservationId]);
+
+  useEffect(() => {
+    const isCompleted =
+      new Date(`${data?.reserve_date}T${data?.reserve_end_time}`) < new Date();
+    setIsCompleted(isCompleted);
+  }, [data]);
 
   if (!data) return null;
 
@@ -103,24 +109,31 @@ const ReservationDetailPopup = ({
             </li>
           </ul>
           <div className="flex flex-col items-center gap-2 py-5">
-            {data.reservation_confirmed ? (
+            {!data.reservation_confirmed ? (
               <>
-                <CircleCheck size={50} strokeWidth={1.5} color="#4461F2" />
-                <span className="text-purple font-semibold text-lg">
-                  예약 확정 상태
+                <CircleX size={50} strokeWidth={1.5} color="#ff5e5e" />
+                <span className="text-red font-semibold text-lg">
+                  예약 반려
+                </span>
+              </>
+            ) : isCompleted ? (
+              <>
+                <CircleCheck size={50} strokeWidth={1.5} color="#a5a5a5" />
+                <span className="text-darkgray font-semibold text-lg">
+                  이용 완료
                 </span>
               </>
             ) : (
               <>
-                <CircleX size={50} strokeWidth={1.5} color="#ff5e5e" />
-                <span className="text-red font-semibold text-lg">
-                  예약 반려 상태
+                <CircleCheck size={50} strokeWidth={1.5} color="#4461F2" />
+                <span className="text-purple font-semibold text-lg">
+                  예약 확정
                 </span>
               </>
             )}
           </div>
         </div>
-        {data.reservation_confirmed && (
+        {data.reservation_confirmed && !isCompleted && (
           <div className="flex justify-center gap-3">
             <Button text={"예약 변경"} isActive={true} onClick={onEdit} />
             <Button text={"예약 취소"} isActive={true} onClick={onCancel} />
