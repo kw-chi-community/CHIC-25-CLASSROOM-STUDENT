@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import CenteredPageWrapper from "../../components/PageWrapper/CenteredPageWrapper";
 import { createReservation } from "../../api/make-reservation/createReservation";
@@ -16,8 +17,18 @@ import EndTimeSelector from "./components/EndTimeSelector";
 import PurposeInput from "./components/PurposeInput";
 import ParticipantInput from "./components/ParticipantInput";
 import ProfessorInput from "./components/ProfessorInput";
+import ReservationDetailPopup from "../../components/Popup/ReservationDetailPopup";
 
 const MakeReservation = () => {
+  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
+
+  // 팝업 닫으면 홈으로 돌아가기
+  const handleClosePopup = () => {
+    setShowPopup(false);
+    navigate("/");
+  };
+
   const [date, setDate] = useState("");
   const [building, setBuilding] = useState("");
   const [room, setRoom] = useState("");
@@ -36,6 +47,7 @@ const MakeReservation = () => {
     contactNumber: "",
   });
   const [timeList, setTimeList] = useState<fetchTimeListDto[]>([]);
+  const [reservationId, setReservationId] = useState<string>("");
 
   const now = new Date();
   const isAfter5PM = now.getHours() >= 17;
@@ -165,8 +177,9 @@ const MakeReservation = () => {
       professor,
     })
       .then(({ reservationId }) => {
+        setReservationId(reservationId);
+        setShowPopup(true);
         alert("예약이 완료되었습니다!");
-        // TODO: 상세 팝업 처리
       })
       .catch((err) => console.error("예약 실패:", err));
   };
@@ -218,6 +231,14 @@ const MakeReservation = () => {
           <Button type="submit" text="예약하기" isActive={!!isFormValid} />
         </div>
       </form>
+
+      {/* 예약 상세 팝업 */}
+      {showPopup && (
+        <ReservationDetailPopup
+          reservationId={reservationId}
+          onClose={handleClosePopup}
+        />
+      )}
     </CenteredPageWrapper>
   );
 };
