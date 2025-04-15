@@ -11,7 +11,7 @@ const MainHeader = () => {
   };
 
   return (
-    <header className="h-[52px] fixed top-0 left-0 right-0 mx-auto w-full max-w-[600px] bg-opacity-50 bg-white backdrop-blur-lg p-4 flex justify-between items-center z-50">
+    <header className="h-[52px] fixed top-0 left-0 right-0 mx-auto w-full max-w-[600px] bg-opacity-50 bg-white backdrop-blur-lg p-4 flex justify-between items-center z-30">
       <div className="flex justify-between items-center gap-2">
         <img
           src="/logo.svg"

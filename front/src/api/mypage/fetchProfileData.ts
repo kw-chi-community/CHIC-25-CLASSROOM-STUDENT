@@ -1,19 +1,19 @@
 import axios from "axios";
-import { MyPageDto } from "../MyPageDto";
+import { fetchProfileDataDto } from "./dto/fetchProfileDataDto";
 
 // MyPage 데이터 가져오기 함수
-export const fetchMyPageData = async (
+export const fetchProfileData = async (
   studentId: string
-): Promise<MyPageDto | null> => {
+): Promise<fetchProfileDataDto | null> => {
   try {
-    // const response = await axios.get<MyPageDto>(
+    // const response = await axios.get<fetchProfileDataDto>(
     //   `${import.meta.env.VITE_API_URL}/api/mypage`,
     //   { params: { studentId } }
     // );
 
     // return response.data;
 
-    const demoData: MyPageDto = {
+    const demoData: fetchProfileDataDto = {
       name: "홍길동",
       reservation_status: {
         roomNumber: 103,
