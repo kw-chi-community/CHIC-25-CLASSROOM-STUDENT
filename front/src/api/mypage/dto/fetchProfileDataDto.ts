@@ -1,4 +1,4 @@
-export interface MyPageDto {
+export interface fetchProfileDataDto {
   name: string;
   reservation_status: {
     roomNumber: number;
