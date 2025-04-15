@@ -179,10 +179,9 @@ const MakeReservation = () => {
       participantCount,
       professor,
     })
-      .then(({ reservationId }) => {
+      .then((reservationId) => {
         setReservationId(reservationId);
         setShowPopup(true);
-        alert("예약이 완료되었습니다!");
       })
       .catch((err) => console.error("예약 실패:", err));
   };
