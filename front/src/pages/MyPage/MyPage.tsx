@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { fetchProfileData } from "../../api/mypage/fetchProfileData";
 import { fetchProfileDataDto } from "../../api/mypage/dto/fetchProfileDataDto";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
+import ProfileCard from "./components/ProfileCard";
+import ReservationList from "./components/ReservationList";
 
 const MyPage: React.FC = () => {
   const [userData, setUserData] = useState<fetchProfileDataDto | null>(null);
@@ -22,44 +24,8 @@ const MyPage: React.FC = () => {
 
   return (
     <PageWrapper>
-      {/* 프로필 카드 */}
-      <div className="bg-white shadow-lg bg-opacity-40 rounded-xl p-6 w-full max-w-lg text-center relative z-10">
-        <h2 className="text-xl font-bold text-gray-900">내 프로필</h2>
-        {userData ? (
-          <>
-            <p className="text-lg text-gray-700 mt-2">{userData.name}</p>
-            <p className="text-sm text-gray-500">학번: {studentId}</p>
-          </>
-        ) : (
-          <p className="text-sm text-gray-500">로딩 중...</p>
-        )}
-      </div>
-
-      {/* 나의 강의실 예약 현황 */}
-      <div className="bg-white shadow-lg bg-opacity-40 odd:rounded-xl p-6 w-full max-w-lg mt-6 relative z-10">
-        <h2 className="text-xl font-bold text-gray-900">
-          나의 강의실 예약 현황
-        </h2>
-        {userData?.reservation_status ? (
-          <div className="mt-4 p-4 border border-gray-200 rounded-lg">
-            <p className="text-lg font-semibold">
-              강의실 {userData.reservation_status.roomNumber}
-            </p>
-            <p className="text-sm text-gray-600">
-              날짜: {userData.reservation_status.date}
-            </p>
-            <p className="text-sm text-gray-600">
-              시간: {userData.reservation_status.startTime} ~{" "}
-              {userData.reservation_status.endTime}
-            </p>
-            <p className="text-sm text-gray-600">
-              예약 제목: {userData.reservation_status.title}
-            </p>
-          </div>
-        ) : (
-          <p className="text-sm text-gray-500 mt-2">예약 내역이 없습니다.</p>
-        )}
-      </div>
+      <ProfileCard studentId={studentId || ""} userData={userData} />
+      <ReservationList studentId={studentId || ""} />
     </PageWrapper>
   );
 };
