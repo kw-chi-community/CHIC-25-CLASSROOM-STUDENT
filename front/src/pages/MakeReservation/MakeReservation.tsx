@@ -18,6 +18,7 @@ import PurposeInput from "./components/PurposeInput";
 import ParticipantInput from "./components/ParticipantInput";
 import ProfessorInput from "./components/ProfessorInput";
 import ReservationDetailPopup from "../../components/Popup/ReservationDetailPopup";
+import AlertPopup from "../../components/Popup/AlertPopup";
 
 const MakeReservation = () => {
   const navigate = useNavigate();
@@ -28,6 +29,8 @@ const MakeReservation = () => {
     setShowPopup(false);
     navigate("/");
   };
+
+  const [noticePoupOpen, setNoticePoupOpen] = useState<boolean>(true);
 
   const [date, setDate] = useState("");
   const [building, setBuilding] = useState("");
@@ -186,6 +189,14 @@ const MakeReservation = () => {
 
   return (
     <CenteredPageWrapper>
+      {noticePoupOpen && (
+        <AlertPopup
+          text={
+            "강의실 예약은 이용일 기준 2주 전부터, 전날 오후 5시까지 가능합니다."
+          }
+          onClose={() => setNoticePoupOpen(false)}
+        />
+      )}
       <form
         onSubmit={handleSubmit}
         className="bg-white bg-opacity-50 p-6 w-full max-w-lg shadow-lg rounded-xl space-y-3 z-10"
