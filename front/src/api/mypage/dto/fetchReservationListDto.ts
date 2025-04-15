@@ -1,6 +1,6 @@
 export interface fetchReservationListDto {
   id: string; // 예약 아이디
-  reserve_date: Date;
+  reserve_date: string;
   reserve_start_time: string;
   reserve_end_time: string;
   building: string;
