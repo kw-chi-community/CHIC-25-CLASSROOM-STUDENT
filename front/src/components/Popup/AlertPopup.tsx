@@ -1,12 +1,12 @@
 import { createPortal } from "react-dom";
 import Button from "../Button";
 
-interface AlertPopupPopupProps {
+interface AlertPopupProps {
   text: string;
   onClose: () => void;
 }
 
-const AlertPopupPopup = ({ text, onClose }: AlertPopupPopupProps) => {
+const AlertPopup = ({ text, onClose }: AlertPopupProps) => {
   return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="flex flex-col gap-5 bg-white w-full max-w-md p-6 rounded-lg relative shadow-lg">
@@ -20,4 +20,4 @@ const AlertPopupPopup = ({ text, onClose }: AlertPopupPopupProps) => {
   );
 };
 
-export default AlertPopupPopup;
+export default AlertPopup;
