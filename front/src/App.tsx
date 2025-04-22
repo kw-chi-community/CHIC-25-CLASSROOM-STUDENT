@@ -38,6 +38,16 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: ROUTES.UPDATE_RESERVATION.path,
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <ROUTES.UPDATE_RESERVATION.element />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: ROUTES.RESERVATION_STATUS.path,
     element: (
       <ProtectedRoute>
