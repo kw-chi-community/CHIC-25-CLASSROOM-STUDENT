@@ -1,5 +1,5 @@
 export interface updateReservationDto {
-  reservationId: string; // 예약 아이디
+  reservationId?: string | undefined; // 예약 아이디
   date: string; // 예약 날짜
   building: string; // 건물명
   room: string; // 호실
