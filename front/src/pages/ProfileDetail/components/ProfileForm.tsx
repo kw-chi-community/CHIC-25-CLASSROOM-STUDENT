@@ -3,6 +3,9 @@ import { fetchProfileData } from "../../../api/mypage/fetchProfileData";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { fetchProfileDataDto } from "../../../api/mypage/dto/fetchProfileDataDto";
+import { updateUserInformation } from "../../../api/profile-detail/updateUserInformation";
+import { updateUserInformationDto } from "../../../api/profile-detail/dto/updateUserInformationDto";
+import AlertPopup from "../../../components/Popup/AlertPopup";
 
 interface ProfileFormProps {
   studentId: string;
@@ -16,6 +19,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ studentId }) => {
     phoneNumber: "",
   });
   const [editMode, setEditMode] = useState(false);
+  const [alertModalOpen, setAlertModalOpen] = useState(false);
 
   useEffect(() => {
     const loadProfileData = async () => {
@@ -35,9 +39,20 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ studentId }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = () => {
-    // 저장 로직 추가 예정
-    setEditMode(false);
+  const handleSave = async () => {
+    try {
+      const payload: updateUserInformationDto = {
+        studentId,
+        name: formData.name,
+        phoneNumber: formData.phoneNumber,
+      };
+      console.log("payload", payload);
+      await updateUserInformation(payload);
+      setEditMode(false);
+      setAlertModalOpen(true);
+    } catch (error) {
+      console.error("사용자 정보 업데이트 실패:", error);
+    }
   };
 
   return (
@@ -82,6 +97,12 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ studentId }) => {
           />
         )}
       </div>
+      {alertModalOpen ?? (
+        <AlertPopup
+          text="프로필 정보가 수정되었습니다."
+          onClose={() => setAlertModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
