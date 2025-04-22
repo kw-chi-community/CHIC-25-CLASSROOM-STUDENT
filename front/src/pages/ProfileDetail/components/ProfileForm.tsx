@@ -97,7 +97,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ studentId }) => {
           />
         )}
       </div>
-      {alertModalOpen ?? (
+      {alertModalOpen && (
         <AlertPopup
           text="프로필 정보가 수정되었습니다."
           onClose={() => setAlertModalOpen(false)}
