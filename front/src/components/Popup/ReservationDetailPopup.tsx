@@ -14,23 +14,19 @@ import { fetchReservationDetailDto } from "../../api/mypage/dto/fetchReservation
 import { fetchReservationDetail } from "../../api/mypage/fetchReservationDetail";
 import { deleteReservation } from "../../api/make-reservation/deleteReservation";
 
-// TODO 예약 취소, 변경 api 호출 내용
-
 interface ReservationDetailPopupProps {
   reservationId: string;
   onClose: () => void;
-  onCancel?: () => void;
-  onEdit?: () => void;
 }
 
 const ReservationDetailPopup = ({
   reservationId,
   onClose,
-  onCancel,
-  onEdit,
 }: ReservationDetailPopupProps) => {
   const [data, setData] = useState<fetchReservationDetailDto | null>(null);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [isEditable, setIsEditable] = useState<boolean>(true); // 예약 변경 가능 여부
+
   useEffect(() => {
     if (reservationId) {
       fetchReservationDetail(reservationId)
@@ -42,12 +38,34 @@ const ReservationDetailPopup = ({
   }, [reservationId]);
 
   useEffect(() => {
-    const isCompleted =
-      new Date(`${data?.reserve_date}T${data?.reserve_end_time}`) < new Date();
-    setIsCompleted(isCompleted);
+    if (data) {
+      const isCompleted =
+        new Date(`${data?.reserve_date}T${data?.reserve_end_time}`) <
+        new Date();
+      setIsCompleted(isCompleted);
+
+      const currentDate = new Date();
+      const reservationDate = new Date(
+        `${data?.reserve_date}T${data?.reserve_start_time}`
+      );
+      reservationDate.setHours(17, 0, 0, 0); // 이용일 17시
+      reservationDate.setDate(reservationDate.getDate() - 1); // 하루 빼기
+
+      // 예약 변경 가능 여부 체크
+      if (currentDate > reservationDate) {
+        setIsEditable(false);
+      } else {
+        setIsEditable(true);
+      }
+    }
   }, [data]);
 
   if (!data) return null;
+
+  const onUpdateButtonClick = () => {
+    onClose();
+    // TODO: 예약 수정 페이지로 넘어가기
+  };
 
   const onDeleteButtonClick = async () => {
     try {
@@ -146,14 +164,25 @@ const ReservationDetailPopup = ({
           </div>
         </div>
         {data.reservation_confirmed === 1 && !isCompleted && (
-          <div className="flex justify-center gap-3">
-            <Button text={"예약 변경"} isActive={true} onClick={onEdit} />
-            <Button
-              text={"예약 취소"}
-              isActive={true}
-              onClick={onDeleteButtonClick}
-            />
-          </div>
+          <>
+            {!isEditable && (
+              <div className="text-red font-medium">
+                예약 변경은 이용일 전날 17시까지만 가능합니다.
+              </div>
+            )}
+            <div className="flex justify-center gap-3">
+              <Button
+                text={"예약 변경"}
+                isActive={isEditable}
+                onClick={onUpdateButtonClick}
+              />
+              <Button
+                text={"예약 취소"}
+                isActive={true}
+                onClick={onDeleteButtonClick}
+              />
+            </div>
+          </>
         )}
       </div>
     </div>,
