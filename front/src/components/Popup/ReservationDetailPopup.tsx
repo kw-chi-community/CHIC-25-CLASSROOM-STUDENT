@@ -12,6 +12,7 @@ import { createPortal } from "react-dom";
 import Button from "../Button";
 import { fetchReservationDetailDto } from "../../api/mypage/dto/fetchReservationDetailDto";
 import { fetchReservationDetail } from "../../api/mypage/fetchReservationDetail";
+import { deleteReservation } from "../../api/make-reservation/deleteReservation";
 
 // TODO 예약 취소, 변경 api 호출 내용
 
@@ -47,6 +48,17 @@ const ReservationDetailPopup = ({
   }, [data]);
 
   if (!data) return null;
+
+  const onDeleteButtonClick = async () => {
+    try {
+      await deleteReservation(reservationId);
+      alert("예약이 정상적으로 취소되었습니다.");
+      onClose();
+    } catch (error) {
+      console.error(error);
+      alert("예약 취소에 실패했습니다.");
+    }
+  };
 
   return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -136,7 +148,11 @@ const ReservationDetailPopup = ({
         {data.reservation_confirmed === 1 && !isCompleted && (
           <div className="flex justify-center gap-3">
             <Button text={"예약 변경"} isActive={true} onClick={onEdit} />
-            <Button text={"예약 취소"} isActive={true} onClick={onCancel} />
+            <Button
+              text={"예약 취소"}
+              isActive={true}
+              onClick={onDeleteButtonClick}
+            />
           </div>
         )}
       </div>
