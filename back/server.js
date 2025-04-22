@@ -29,6 +29,7 @@ app.use('/api/reserve', reserveRoomRouter); // ✅ 변경: POSTMAN 기준으로 
 app.use("/api", require("./routes/makereserve"));
 app.use("/api", require("./routes/reservationDetail"));
 app.use("/api", require("./routes/reservationList"));
+app.use("/api", require("./routes/updatereserve"));
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
