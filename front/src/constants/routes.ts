@@ -5,6 +5,7 @@ import MakeReservation from "../pages/MakeReservation/MakeReservation";
 import ReservationStatus from "../pages/ReservationStatus/ReservationStatus";
 import Notice from "../pages/Notice/Notice";
 import MyPage from "../pages/MyPage/MyPage";
+import ProfileDetail from "../pages/ProfileDetail/ProfileDetail";
 
 // 페이지 정보 상수
 export const ROUTES = {
@@ -42,6 +43,11 @@ export const ROUTES = {
     path: "/mypage",
     element: MyPage,
     title: "마이페이지",
+  },
+  PROFILE_DETAIL: {
+    path: "/mypage/profile-detail",
+    element: ProfileDetail,
+    title: "프로필 상세",
   },
 } as const;
 

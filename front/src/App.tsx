@@ -67,6 +67,16 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: ROUTES.PROFILE_DETAIL.path,
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <ROUTES.PROFILE_DETAIL.element />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 function App() {
