@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { classDB } = require("../db/mongodb");
+const { ObjectId } = require("mongodb");
 
 const Class = classDB.collection("class");
 const Reserve = classDB.collection("reserve");
+const ClassroomInfo = classDB.collection("classroom_info"); // ✅ 추가
 
 // 요일 매핑
 const getDayField = (dateStr) => {
@@ -12,18 +14,9 @@ const getDayField = (dateStr) => {
 };
 
 const buildingMap = {
-  복지관: "복",
-  비마관: "비",
-  새빛관: "새빛",
-  연구관: "연",
-  옥의관: "옥",
-  참빛관: "참",
-  한울관: "한울",
-  화도관: "화",
-  기념관: "기",
-  누리관: "누",
-  미지정: null,
-  "": null,
+  복지관: "복", 비마관: "비", 새빛관: "새빛", 연구관: "연", 옥의관: "옥",
+  참빛관: "참", 한울관: "한울", 화도관: "화", 기념관: "기", 누리관: "누",
+  미지정: null, "": null,
 };
 
 // POST /api/reserve/check-time
@@ -36,14 +29,19 @@ router.post("/reserve/check-time", async (req, res) => {
 
     const weekday = getDayField(date); // 예: mon
 
+    // ✅ classroom_info_id 찾기
+    const classroom = await ClassroomInfo.findOne({ building, room });
+    if (!classroom) {
+      return res.status(404).json({ message: "해당 강의실 정보 없음" });
+    }
+
     // 1️⃣ 예약 정보 조회
     const reservationResults = await Reserve.find({
       reserve_date: {
         $gte: new Date(date + "T00:00:00.000Z"),
         $lt: new Date(date + "T23:59:59.999Z"),
       },
-      reserve_title: building,
-      classroom_idx: room,
+      classroom_info_id: classroom._id // ✅ 필드 수정
     }).toArray();
 
     const reservationTimes = reservationResults.map((r) => ({
