@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { fetchProfileData } from "../../../api/mypage/fetchProfileData";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { fetchProfileDataDto } from "../../../api/mypage/dto/fetchProfileDataDto";
@@ -17,12 +18,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ studentId }) => {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    // 임시 데이터, 실제로는 API로 불러올 것
-    setFormData({
-      name: "홍길동",
-      email: "hong@example.com",
-      phoneNumber: "010-1234-5678",
-    });
+    const loadProfileData = async () => {
+      try {
+        const data = await fetchProfileData(studentId);
+        setFormData(data ?? { name: "", email: "", phoneNumber: "" });
+      } catch (error) {
+        console.error("프로필 정보를 불러오는데 실패했습니다.", error);
+      }
+    };
+
+    loadProfileData();
   }, [studentId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
