@@ -3,7 +3,7 @@ export const deleteUserAccount = async (studentId: string) => {
     const token = sessionStorage.getItem("accessToken");
 
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/delete-account`,
+      `${import.meta.env.VITE_API_URL}/api/delete-user`,
       {
         method: "DELETE",
         headers: {
