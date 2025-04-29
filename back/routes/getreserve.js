@@ -4,7 +4,7 @@ const Reservation = require("../db/reservation");
 const ClassroomInfo = require("../db/classroomInfo");
 const { ObjectId } = require("mongodb");
 
-router.get("/get-reservation", async (req, res) => {
+router.post("/get-reservation", async (req, res) => {
   try {
     const { reservationId } = req.body;
 

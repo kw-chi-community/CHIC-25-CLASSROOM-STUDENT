@@ -32,6 +32,7 @@ app.use("/api", require("./routes/reservationList"));
 app.use("/api", require("./routes/updatereserve"));
 app.use("/api", require("./routes/deletereserve"));
 app.use("/api", require("./routes/getreserve"));
+app.use("/api", require("./routes/classroomReservation"));
 
 
 // 서버 실행
