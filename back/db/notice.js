@@ -11,5 +11,5 @@ const noticeSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now }      // 생성일시
 }, { versionKey: false });
 
-const Notice = noticeDB.model('Notice', noticeSchema, 'board'); // ✅ board 컬렉션에 저장
+const Notice = noticeDB.model('Notice', noticeSchema, 'notices');
 module.exports = Notice;
