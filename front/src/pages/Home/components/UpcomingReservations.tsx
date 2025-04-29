@@ -48,7 +48,7 @@ const UpcomingReservations = () => {
     };
 
     getReservations();
-  }, [studentId]);
+  }, [studentId, selectedId]);
 
   if (loading) return <div>Loading...</div>;
 
