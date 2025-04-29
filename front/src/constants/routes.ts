@@ -38,7 +38,7 @@ export const ROUTES = {
   RESERVATION_STATUS: {
     path: "/reservation-status",
     element: ReservationStatus,
-    title: "전체 강의실 사용 현황",
+    title: "강의실 사용 현황",
   },
   NOTICE: {
     path: "/notice",

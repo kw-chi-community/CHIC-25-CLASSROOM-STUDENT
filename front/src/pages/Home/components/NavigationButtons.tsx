@@ -12,7 +12,7 @@ const NavigationButtons = () => {
     },
     {
       to: "/reservation-status",
-      label: "전체 강의실 사용 현황",
+      label: "강의실 사용 현황",
       icon: (
         <ClipboardList
           size={28}
