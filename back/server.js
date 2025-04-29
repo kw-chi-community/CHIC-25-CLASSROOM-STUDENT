@@ -31,6 +31,7 @@ app.use("/api", require("./routes/reservationDetail"));
 app.use("/api", require("./routes/reservationList"));
 app.use("/api", require("./routes/updatereserve"));
 app.use("/api", require("./routes/deletereserve"));
+app.use("/api", require("./routes/getreserve"));
 
 
 // 서버 실행
