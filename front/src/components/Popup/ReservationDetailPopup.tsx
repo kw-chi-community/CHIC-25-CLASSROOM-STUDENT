@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   X,
   User,
@@ -12,24 +13,22 @@ import { createPortal } from "react-dom";
 import Button from "../Button";
 import { fetchReservationDetailDto } from "../../api/mypage/dto/fetchReservationDetailDto";
 import { fetchReservationDetail } from "../../api/mypage/fetchReservationDetail";
-
-// TODO 예약 취소, 변경 api 호출 내용
+import { deleteReservation } from "../../api/make-reservation/deleteReservation";
 
 interface ReservationDetailPopupProps {
   reservationId: string;
   onClose: () => void;
-  onCancel?: () => void;
-  onEdit?: () => void;
 }
 
 const ReservationDetailPopup = ({
   reservationId,
   onClose,
-  onCancel,
-  onEdit,
 }: ReservationDetailPopupProps) => {
   const [data, setData] = useState<fetchReservationDetailDto | null>(null);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [isEditable, setIsEditable] = useState<boolean>(true); // 예약 변경 가능 여부
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (reservationId) {
       fetchReservationDetail(reservationId)
@@ -41,12 +40,45 @@ const ReservationDetailPopup = ({
   }, [reservationId]);
 
   useEffect(() => {
-    const isCompleted =
-      new Date(`${data?.reserve_date}T${data?.reserve_end_time}`) < new Date();
-    setIsCompleted(isCompleted);
+    if (data) {
+      const isCompleted =
+        new Date(`${data?.reserve_date}T${data?.reserve_end_time}`) <
+        new Date();
+      setIsCompleted(isCompleted);
+
+      const currentDate = new Date();
+      const reservationDate = new Date(
+        `${data?.reserve_date}T${data?.reserve_start_time}`
+      );
+      reservationDate.setHours(17, 0, 0, 0); // 이용일 17시
+      reservationDate.setDate(reservationDate.getDate() - 1); // 하루 빼기
+
+      // 예약 변경 가능 여부 체크
+      if (currentDate > reservationDate) {
+        setIsEditable(false);
+      } else {
+        setIsEditable(true);
+      }
+    }
   }, [data]);
 
   if (!data) return null;
+
+  const onUpdateButtonClick = () => {
+    onClose();
+    navigate(`/update-reservation/${reservationId}`);
+  };
+
+  const onDeleteButtonClick = async () => {
+    try {
+      await deleteReservation(reservationId);
+      alert("예약이 정상적으로 취소되었습니다.");
+      onClose();
+    } catch (error) {
+      console.error(error);
+      alert("예약 취소에 실패했습니다.");
+    }
+  };
 
   return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -134,10 +166,25 @@ const ReservationDetailPopup = ({
           </div>
         </div>
         {data.reservation_confirmed === 1 && !isCompleted && (
-          <div className="flex justify-center gap-3">
-            <Button text={"예약 변경"} isActive={true} onClick={onEdit} />
-            <Button text={"예약 취소"} isActive={true} onClick={onCancel} />
-          </div>
+          <>
+            {!isEditable && (
+              <div className="text-red font-medium">
+                예약 변경은 이용일 전날 17시까지만 가능합니다.
+              </div>
+            )}
+            <div className="flex justify-center gap-3">
+              <Button
+                text={"예약 변경"}
+                isActive={isEditable}
+                onClick={onUpdateButtonClick}
+              />
+              <Button
+                text={"예약 취소"}
+                isActive={true}
+                onClick={onDeleteButtonClick}
+              />
+            </div>
+          </>
         )}
       </div>
     </div>,

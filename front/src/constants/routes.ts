@@ -2,6 +2,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import MakeReservation from "../pages/MakeReservation/MakeReservation";
+import UpdateReservation from "../pages/UpdateReservation/UpdateReservation";
 import ReservationStatus from "../pages/ReservationStatus/ReservationStatus";
 import Notice from "../pages/Notice/Notice";
 import MyPage from "../pages/MyPage/MyPage";
@@ -28,6 +29,11 @@ export const ROUTES = {
     path: "/make-reservation",
     element: MakeReservation,
     title: "강의실 사용 예약",
+  },
+  UPDATE_RESERVATION: {
+    path: "/update-reservation/:reservationId",
+    element: UpdateReservation,
+    title: "예약 내역 수정",
   },
   RESERVATION_STATUS: {
     path: "/reservation-status",

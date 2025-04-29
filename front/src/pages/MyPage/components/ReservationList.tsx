@@ -23,7 +23,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ studentId }) => {
     } else {
       setReservations([]);
     }
-  }, [studentId]);
+  }, [studentId, selectedId]);
 
   const hasReservations = reservations.length > 0;
 
