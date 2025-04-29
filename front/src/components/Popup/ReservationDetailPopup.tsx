@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   X,
   User,
@@ -26,6 +27,7 @@ const ReservationDetailPopup = ({
   const [data, setData] = useState<fetchReservationDetailDto | null>(null);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [isEditable, setIsEditable] = useState<boolean>(true); // 예약 변경 가능 여부
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (reservationId) {
@@ -64,7 +66,7 @@ const ReservationDetailPopup = ({
 
   const onUpdateButtonClick = () => {
     onClose();
-    // TODO: 예약 수정 페이지로 넘어가기
+    navigate(`/update-reservation/${reservationId}`);
   };
 
   const onDeleteButtonClick = async () => {

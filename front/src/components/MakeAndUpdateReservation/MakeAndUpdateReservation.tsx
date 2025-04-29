@@ -78,21 +78,21 @@ const MakeAndUpdateReservation = ({
     setDate(formatDate(minReservationDate));
   }, []);
 
-  // Fetch reservation details in edit mode (mock for now)
+  // 예약 수정 모드일 때, 기존 데이터를 받아오도록
   useEffect(() => {
     if (!isEditMode || !reservationId) return;
 
-    // TODO: 실제 기존 데이터 받아오는거 수정
+    // 실제 기존 데이터 받아오는거 수정
     getReservation(reservationId)
-      .then((mock: getReservationDto) => {
-        setDate(mock.date);
-        setBuilding(mock.building);
-        setRoom(mock.room);
-        setStartTime(mock.startTime);
-        setEndTime(mock.endTime);
-        setPurpose(mock.purpose);
-        setParticipantCount(mock.participantCount);
-        setProfessor(mock.professor);
+      .then((originData: getReservationDto) => {
+        setDate(originData.date);
+        setBuilding(originData.building);
+        setRoom(originData.room);
+        setStartTime(originData.startTime);
+        setEndTime(originData.endTime);
+        setPurpose(originData.purpose);
+        setParticipantCount(originData.participantCount);
+        setProfessor(originData.professor);
       })
       .catch((err) =>
         console.error("Failed to fetch reservation details:", err)
