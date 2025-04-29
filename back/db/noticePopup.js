@@ -6,4 +6,4 @@ const noticePopupSchema = new mongoose.Schema({
   noticeId: { type: mongoose.Schema.Types.ObjectId, required: true }
 }, { versionKey: false });
 
-module.exports = noticeDB.model("NoticePopup", noticePopupSchema, "notice-popup");
+module.exports = noticeDB.model("NoticePopup", noticePopupSchema, "notice_popup");

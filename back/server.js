@@ -35,6 +35,7 @@ app.use("/api", require("./routes/getreserve"));
 app.use("/api", require("./routes/noticeList"));
 app.use("/api", require("./routes/noticeDetail"));
 app.use("/api", require("./routes/showPopup"));
+app.use("/api", require("./routes/hiddenPopup"));
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
