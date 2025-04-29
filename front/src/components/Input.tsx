@@ -53,7 +53,7 @@ const Input: React.FC<InputProps> = ({
           readOnly
             ? "bg-transparent text-black border-transparent cursor-default focus:outline-none focus:ring-0 focus:border-transparent"
             : "border border-gray bg-skyblue text-gray-700 focus:ring-2 focus:ring-lightpurple focus:outline-none"
-        }`}
+        } ${type === "date" ? "text-center" : ""}`}
         tabIndex={readOnly ? -1 : undefined}
       />
     </div>
