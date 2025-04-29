@@ -1,0 +1,39 @@
+const express = require("express");
+const router = express.Router();
+const Notice = require("../db/notice");
+const NoticePopup = require("../db/noticePopup");
+
+router.post("/show-notice-popup", async (req, res) => {
+  try {
+    const { studentId } = req.body;
+    if (!studentId) {
+      return res.status(400).json({ message: "studentId가 필요합니다." });
+    }
+
+    // 모든 팝업 공지
+    const popupNotices = await Notice.find({ type: true }).lean();
+
+    // 숨김 기록 조회
+    const hiddenRecords = await NoticePopup.find({ studentId }).lean();
+    const hiddenIds = hiddenRecords.map(r => r.noticeId.toString());
+
+    // 숨기지 않은 공지만 필터링
+    const visibleNotices = popupNotices
+      .filter(n => !hiddenIds.includes(n._id.toString()))
+      .map(n => ({
+        id: n._id,
+        start_date: n.start_date.toISOString().slice(0, 10),
+        end_date: n.end_date.toISOString().slice(0, 10),
+        title: n.title,
+        contents: n.contents,
+        isHidden: false
+      }));
+
+    return res.status(200).json(visibleNotices);
+  } catch (err) {
+    console.error("show-notice-popup 오류:", err);
+    res.status(500).json({ message: "서버 오류" });
+  }
+});
+
+module.exports = router;
