@@ -61,8 +61,8 @@ router.post("/classroom-reservation", async (req, res) => {
             type: "lecture",
             start_time: cls[`${weekday}_start_time`],
             end_time: cls[`${weekday}_end_time`],
-            subject: cls.subject || "수업",
-            professor: cls.professor || "미정",
+            subject: cls.class_name || "수업",
+            professor: cls.prof_name || "미정",
             date: `${weekdayMap[weekday]}요일` // 요일 기반으로만 표기
           });
         }
