@@ -10,7 +10,7 @@ export const fetchReservationNoticeDetail = async (noticeId: string) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ noticeId }),
+      body: JSON.stringify({ id: noticeId }),
     });
 
     if (!response.ok) {
