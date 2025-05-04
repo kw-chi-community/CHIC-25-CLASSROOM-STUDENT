@@ -24,7 +24,7 @@ const NoticeDetail = () => {
         <p className="text-red">{error}</p>
       ) : notice ? (
         <div className="bg-white bg-opacity-50 p-6 rounded-xl space-y-4 w-full">
-          <h1 className="text-xl font-bold text-purple">
+          <h1 className="text-xl font-bold ">
             {notice.type === false ? "[중요]" : "[일반]"} {notice.title}
           </h1>
           <p className="text-sm text-black">

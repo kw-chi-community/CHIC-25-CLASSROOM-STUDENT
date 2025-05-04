@@ -51,9 +51,6 @@ const NoticePage = () => {
                     <span className="text-purple font-semibold">[중요]</span>{" "}
                     {notice.title}
                   </span>
-                  <span className="text-sm text-darkgray">
-                    {notice.created_at}
-                  </span>
                 </div>
               </Link>
             ))}
