@@ -3,6 +3,7 @@ import { fetchReservationNotices } from "../../../api/notice/fetchReservationNot
 import { fetchReservationNoticesDto } from "../../../api/notice/dto/fetchReservationNoticesDto.ts";
 import { Link } from "react-router-dom";
 import { Pin } from "lucide-react";
+import { ROUTES } from "../../../constants/routes.ts";
 
 const ReservationNotice = () => {
   const [notices, setNotices] = useState<fetchReservationNoticesDto[]>([]); // 공지 데이터를 저장할 상태
@@ -53,7 +54,12 @@ const ReservationNotice = () => {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold mb-2">📢 예약 관련 공지</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold">예약 관련 공지</h2>
+        <Link to={ROUTES.NOTICE.path} className="text-purple hover:underline">
+          + 더보기
+        </Link>
+      </div>
       <div className="bg-white rounded-xl p-4 shadow-sm space-y-2 border border-1 border-gray">
         {error ? (
           <p>
