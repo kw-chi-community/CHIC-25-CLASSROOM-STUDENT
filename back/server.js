@@ -32,10 +32,15 @@ app.use("/api", require("./routes/reservationList"));
 app.use("/api", require("./routes/updatereserve"));
 app.use("/api", require("./routes/deletereserve"));
 app.use("/api", require("./routes/getreserve"));
+
 app.use("/api", require("./routes/noticeList"));
 app.use("/api", require("./routes/noticeDetail"));
 app.use("/api", require("./routes/showPopup"));
 app.use("/api", require("./routes/hiddenPopup"));
+app.use("/api", require("./routes/userInfo"));
+app.use("/api", require("./routes/updateUser"));
+app.use("/api", require("./routes/deleteUser"));
+
 
 // 서버 실행
 const PORT = process.env.PORT || 4000;
