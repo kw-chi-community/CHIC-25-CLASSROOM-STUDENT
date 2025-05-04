@@ -68,6 +68,16 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: ROUTES.NOTICE_DETAIL.path,
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <ROUTES.NOTICE_DETAIL.element />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: ROUTES.MYPAGE.path,
     element: (
       <ProtectedRoute>
