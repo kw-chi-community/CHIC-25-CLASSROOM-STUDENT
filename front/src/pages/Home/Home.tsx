@@ -10,9 +10,9 @@ import { fetchNoticePopupDto } from "../../api/notice/dto/fetchNoticePopupDto";
 const Home = () => {
   const [popupList, setPopupList] = useState<fetchNoticePopupDto[]>([]);
   const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
+  const studentId = sessionStorage.getItem("studentId");
 
   useEffect(() => {
-    const studentId = sessionStorage.getItem("studentId");
     if (studentId) {
       fetchNoticePopup(studentId).then((res) => {
         if (Array.isArray(res)) {
@@ -26,6 +26,7 @@ const Home = () => {
     <>
       {popupList.length > 0 && currentPopupIndex < popupList.length && (
         <NoticePopup
+          studentId={studentId || ""}
           notice={popupList[currentPopupIndex]}
           onClose={() => setCurrentPopupIndex(currentPopupIndex + 1)}
         />
