@@ -21,15 +21,15 @@ router.post("/show-notice-popup", async (req, res) => {
       const isHidden = hiddenIds.includes(n._id.toString()); // ✅ 문자열로 비교
       return {
         id: n._id,
-        start_date: n.start_date.toISOString().slice(0, 10),
-        end_date: n.end_date.toISOString().slice(0, 10),
         title: n.title,
         contents: n.contents,
-        isHidden,
       };
     });
 
-    const visibleNotices = noticesWithHiddenFlag.filter((n) => !n.isHidden);
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD 형식
+    const visibleNotices = noticesWithHiddenFlag.filter((n) => {
+      return !n.isHidden && n.start_date <= today && n.end_date >= today;
+    });
     return res.status(200).json(visibleNotices);
   } catch (err) {
     console.error("show-notice-popup 오류:", err);

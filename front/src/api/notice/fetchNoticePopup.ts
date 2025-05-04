@@ -17,8 +17,7 @@ export const fetchNoticePopup = async (studentId: string) => {
       throw new Error("데이터를 가져오는 데 실패했습니다.");
     }
 
-    const rawData: fetchNoticePopupDto[] = await response.json();
-    const data = rawData.filter((item) => !item.isHidden);
+    const data: fetchNoticePopupDto[] = await response.json();
 
     return data;
   } catch (error) {
