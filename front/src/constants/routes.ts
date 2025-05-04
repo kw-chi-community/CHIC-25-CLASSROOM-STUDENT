@@ -7,7 +7,7 @@ import ReservationStatus from "../pages/ReservationStatus/ReservationStatus";
 import Notice from "../pages/Notice/Notice";
 import MyPage from "../pages/MyPage/MyPage";
 import ProfileDetail from "../pages/ProfileDetail/ProfileDetail";
-
+import NoticeDetail from "../pages/NoticeDetail/NoticeDetail";
 // 페이지 정보 상수
 export const ROUTES = {
   HOME: {
@@ -44,6 +44,11 @@ export const ROUTES = {
     path: "/notice",
     element: Notice,
     title: "예약 관련 공지",
+  },
+  NOTICE_DETAIL: {
+    path: "/notice/:noticeId",
+    element: NoticeDetail,
+    title: "공지사항 상세",
   },
   MYPAGE: {
     path: "/mypage",

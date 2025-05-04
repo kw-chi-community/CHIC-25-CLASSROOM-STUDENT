@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { fetchReservationList } from "../../../api/mypage/fetchReservationList.ts";
 import { fetchReservationListDto } from "../../../api/mypage/dto/fetchReservationListDto.ts";
 import ReservationDetailPopup from "../../../components/Popup/ReservationDetailPopup.tsx";
+import { ROUTES } from "../../../constants/routes.ts";
+import { Link } from "react-router-dom";
 
 const UpcomingReservations = () => {
   const [reservations, setReservations] = useState<fetchReservationListDto[]>(
@@ -54,7 +56,12 @@ const UpcomingReservations = () => {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold mb-2">📅 다가오는 내 예약</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold">다가오는 내 예약</h2>
+        <Link to={ROUTES.MYPAGE.path} className="text-purple hover:underline">
+          + 더보기
+        </Link>
+      </div>
       <div className="bg-white rounded-xl p-4 shadow-sm border border-gray">
         {error ? (
           <p className="text-red-500">{error}</p>
