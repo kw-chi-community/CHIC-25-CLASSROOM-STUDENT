@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { fetchReservationNotices } from "../../../api/notice/fetchReservationNotices.ts"; // API 함수 임포트
 import { fetchReservationNoticesDto } from "../../../api/notice/dto/fetchReservationNoticesDto.ts";
 import { Link } from "react-router-dom";
-import { Pin } from "lucide-react";
 import { ROUTES } from "../../../constants/routes.ts";
 
 const ReservationNotice = () => {
@@ -74,7 +73,11 @@ const ReservationNotice = () => {
             >
               <div className="flex justify-between items-center gap-2">
                 <span className="flex items-center gap-x-1 truncate">
-                  {notice.type === false && <Pin strokeWidth={1.5} size={20} />}
+                  {notice.type === false ? (
+                    <span className="text-purple font-semibold">[중요]</span>
+                  ) : (
+                    <span>[일반]</span>
+                  )}
                   <span className="truncate">{notice.title}</span>
                 </span>
                 {notice.type === true && (
