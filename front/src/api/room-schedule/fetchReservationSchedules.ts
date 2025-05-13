@@ -2,7 +2,8 @@ import { fetchReservationSchedulesDto } from "./dto/fetchReservationSchedulesDto
 
 export const fetchReservationSchedules = async (
   building: string,
-  room: string
+  room: string,
+  date: string
 ) => {
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
@@ -13,7 +14,7 @@ export const fetchReservationSchedules = async (
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ building, room }),
+      body: JSON.stringify({ building, room, date }),
     });
 
     if (!response.ok) {
