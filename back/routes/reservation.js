@@ -6,6 +6,7 @@ const { ObjectId } = require("mongodb");
 const Class = classDB.collection("class");
 const Reserve = classDB.collection("reserve");
 const ClassroomInfo = classDB.collection("classroom_info"); // ✅ 추가
+const auth = require("../middlewares/authMiddleware");
 
 // 요일 매핑
 const getDayField = (dateStr) => {
@@ -20,7 +21,7 @@ const buildingMap = {
 };
 
 // POST /api/reserve/check-time
-router.post("/reserve/check-time", async (req, res) => {
+router.post("/reserve/check-time", auth, async (req, res) => {
   try {
     const { date, building, room } = req.body;
     if (!date || !building || !room) {

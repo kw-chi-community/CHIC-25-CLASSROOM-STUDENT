@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const ClassroomInfo = require("../db/classroomInfo"); // DB 모델
+const auth = require("../middlewares/authMiddleware");
 
-router.post("/check-room", async (req, res) => {
+router.post("/check-room", auth, async (req, res) => {
   const { building } = req.body;
 
   try {

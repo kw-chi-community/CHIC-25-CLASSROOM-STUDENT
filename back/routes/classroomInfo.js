@@ -4,8 +4,9 @@ const { classDB } = require("../db/mongodb");
 
 // classroom_info 컬렉션 직접 참조
 const ClassroomInfo = classDB.collection("classroom_info");
+const auth = require("../middlewares/authMiddleware");
 
-router.post("/reserve/classroom-info", async (req, res) => {
+router.post("/reserve/classroom-info", auth, async (req, res) => {
   try {
     const { building, room } = req.body;
     if (!building || !room) {

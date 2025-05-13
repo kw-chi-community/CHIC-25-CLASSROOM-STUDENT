@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Notice = require("../db/notice");
 const { Types } = require("mongoose");
+const auth = require("../middlewares/authMiddleware");
 
 // POST /api/notice-detail
-router.post("/notice-detail", async (req, res) => {
+router.post("/notice-detail", auth, async (req, res) => {
   try {
     const { id } = req.body;
 

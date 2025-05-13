@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Reservation = require("../db/reservation");
 const ClassroomInfo = require("../db/classroomInfo");
+const auth = require("../middlewares/authMiddleware");
 
 // POST /api/reservation-detail
-router.post("/reservation-detail", async (req, res) => {
+router.post("/reservation-detail", auth, async (req, res) => {
   try {
     const { reservationId } = req.body;
 
