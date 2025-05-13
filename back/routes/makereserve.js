@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ClassroomInfo = require("../db/classroomInfo");
 const Reservation = require("../db/reservation");
+const auth = require("../middlewares/authMiddleware");
 
 // 시간 포맷 보정 함수 (선택사항)
 const formatTime = (timeStr) => {
@@ -10,7 +11,7 @@ const formatTime = (timeStr) => {
 };
 
 // POST /api/make-reservation
-router.post("/make-reservation", async (req, res) => {
+router.post("/make-reservation", auth, async (req, res) => {
   try {
     const {
       studentId,

@@ -3,8 +3,9 @@ const router = express.Router();
 const Reservation = require("../db/reservation");
 const ClassroomInfo = require("../db/classroomInfo");
 const { ObjectId } = require("mongodb");
+const auth = require("../middlewares/authMiddleware");
 
-router.post("/get-reservation", async (req, res) => {
+router.post("/get-reservation", auth, async (req, res) => {
   try {
     const { reservationId } = req.body;
 

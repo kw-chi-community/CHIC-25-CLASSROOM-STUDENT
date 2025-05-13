@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Students = require("../db/student"); // students 컬렉션 연결
+const auth = require("../middlewares/authMiddleware");
 
 // POST /api/user-info
-router.post("/user-info", async (req, res) => {
+router.post("/user-info", auth, async (req, res) => {
   try {
     const { studentId } = req.body;
 

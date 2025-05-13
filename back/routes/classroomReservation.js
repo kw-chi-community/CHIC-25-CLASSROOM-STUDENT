@@ -5,6 +5,7 @@ const Reservation = require("../db/reservation");
 const Class = require("../db/class");
 const Student = require("../db/student");
 const { ObjectId } = require("mongodb");
+const auth = require("../middlewares/authMiddleware");
 
 const buildingMap = {
   복지관: "복", 비마관: "비", 새빛관: "새빛", 연구관: "연", 옥의관: "옥",
@@ -16,7 +17,7 @@ const getWeekdayKey = (dateStr) => {
   return days[new Date(dateStr).getDay()];
 };
 
-router.post("/classroom-reservation", async (req, res) => {
+router.post("/classroom-reservation", auth, async (req, res) => {
   try {
     const { building, room, date } = req.body;
 
