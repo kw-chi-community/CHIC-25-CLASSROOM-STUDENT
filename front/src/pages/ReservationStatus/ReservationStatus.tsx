@@ -48,8 +48,9 @@ const ReservationStatus = () => {
 
   // room 선택 시 예약 데이터 로드 (조건: building과 room 모두 선택된 경우)
   useEffect(() => {
+    console.log(date, building, room);
     if (date && building && room && room !== "강의실") {
-      fetchReservationSchedules(building, room).then((schedules) => {
+      fetchReservationSchedules(building, room, date).then((schedules) => {
         setData(schedules);
       });
     } else {
