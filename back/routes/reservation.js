@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const { classDB } = require("../db/mongodb");
 const { ObjectId } = require("mongodb");
-
-const Class = classDB.collection("class");
-const Reserve = classDB.collection("reserve");
-const ClassroomInfo = classDB.collection("classroom_info"); // ✅ 추가
 const auth = require("../middlewares/authMiddleware");
+
+const Reserve = classDB.collection("reserve");
+const ClassroomInfo = classDB.collection("classroom_info");
+const Schedule = classDB.collection("schedule");
 
 // 요일 매핑
 const getDayField = (dateStr) => {
@@ -20,6 +20,18 @@ const buildingMap = {
   미지정: null, "": null,
 };
 
+// 학기명 조회 함수
+const getSemesterByDate = async (dateStr) => {
+  const targetDate = new Date(dateStr);
+  const semesterDoc = await Schedule.findOne({
+    start_time: { $lte: targetDate },
+    end_time: { $gte: targetDate },
+  });
+
+  if (!semesterDoc) return null;
+  return `${semesterDoc.year}-${semesterDoc.semester}`;
+};
+
 // POST /api/reserve/check-time
 router.post("/reserve/check-time", auth, async (req, res) => {
   try {
@@ -28,7 +40,7 @@ router.post("/reserve/check-time", auth, async (req, res) => {
       return res.status(400).json({ message: "date, building, room 필수" });
     }
 
-    const weekday = getDayField(date); // 예: mon
+    const weekday = getDayField(date);
 
     // ✅ classroom_info_id 찾기
     const classroom = await ClassroomInfo.findOne({ building, room });
@@ -42,7 +54,7 @@ router.post("/reserve/check-time", auth, async (req, res) => {
         $gte: new Date(date + "T00:00:00.000Z"),
         $lt: new Date(date + "T23:59:59.999Z"),
       },
-      classroom_info_id: classroom._id // ✅ 필드 수정
+      classroom_info_id: classroom._id
     }).toArray();
 
     const reservationTimes = reservationResults.map((r) => ({
@@ -50,7 +62,14 @@ router.post("/reserve/check-time", auth, async (req, res) => {
       endTime: r.reserve_end_time,
     }));
 
-    // 2️⃣ 수업 정보 조회
+    // 2️⃣ 학기에 맞는 강의 정보 조회
+    const semesterKey = await getSemesterByDate(date);
+    if (!semesterKey) {
+      return res.status(200).json([...reservationTimes]); // 학기 없으면 예약만 반환
+    }
+
+    const Class = classDB.collection(semesterKey);
+
     const buildingPrefix = buildingMap[building];
     const computedClassroomIdx = buildingPrefix
       ? `${buildingPrefix}${room.replace("호", "")}`
@@ -70,7 +89,6 @@ router.post("/reserve/check-time", auth, async (req, res) => {
         endTime: cls[`${weekday}_end_time`],
       }));
 
-    // 3️⃣ 합쳐서 응답
     return res.status(200).json([...reservationTimes, ...classTimes]);
   } catch (err) {
     console.error("check-time 오류:", err);
