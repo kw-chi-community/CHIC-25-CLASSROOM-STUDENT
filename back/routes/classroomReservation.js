@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const ClassroomInfo = require("../db/classroomInfo");
 const Reservation = require("../db/reservation");
-const Class = require("../db/class");
 const Student = require("../db/student");
 const { ObjectId } = require("mongodb");
 const auth = require("../middlewares/authMiddleware");
+const { classDB } = require("../db/mongodb");
+const Schedule = classDB.collection("schedule");
 
 const buildingMap = {
   복지관: "복", 비마관: "비", 새빛관: "새빛", 연구관: "연", 옥의관: "옥",
@@ -15,6 +16,16 @@ const buildingMap = {
 const getWeekdayKey = (dateStr) => {
   const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
   return days[new Date(dateStr).getDay()];
+};
+
+const getSemesterByDate = async (dateStr) => {
+  const targetDate = new Date(dateStr);
+  const semesterDoc = await Schedule.findOne({
+    start_time: { $lte: targetDate },
+    end_time: { $gte: targetDate },
+  });
+  if (!semesterDoc) return null;
+  return `${semesterDoc.year}-${semesterDoc.semester}`;
 };
 
 router.post("/classroom-reservation", auth, async (req, res) => {
@@ -30,7 +41,7 @@ router.post("/classroom-reservation", auth, async (req, res) => {
 
     const startOfDay = new Date(`${date}T00:00:00`);
     const endOfDay = new Date(`${date}T23:59:59`);
-    const weekday = getWeekdayKey(date); // mon, tue, ...
+    const weekday = getWeekdayKey(date);
 
     // ✅ 예약 정보 가져오기
     const reservations = await Reservation.find({
@@ -49,10 +60,14 @@ router.post("/classroom-reservation", auth, async (req, res) => {
       };
     }));
 
-    // ✅ 수업 정보 가져오기
+    // ✅ 수업 정보 가져오기 (동적 컬렉션)
+    const semesterKey = await getSemesterByDate(date);
+    if (!semesterKey) return res.status(200).json([...reservationResults]);
+
+    const Class = classDB.collection(semesterKey);
     const shortRoom = room.replace("호", "");
     const roomIdx = `${buildingMap[building] || ""}${shortRoom}`;
-    const classResults = await Class.find({ classroom_idx: roomIdx }).lean();
+    const classResults = await Class.find({ classroom_idx: roomIdx }).toArray();
 
     const lectureResults = classResults
       .filter(c => c[`week_${weekday}`])
