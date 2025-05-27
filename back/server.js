@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log("✅ JWT_SECRET:", process.env.JWT_SECRET); // 이거 안 찍히면 dotenv 문제 확실
 const express = require('express');
 const cors = require('cors');
 const reserveRoomRouter = require('./routes/reserveRoom');
