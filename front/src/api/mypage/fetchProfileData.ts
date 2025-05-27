@@ -4,6 +4,8 @@ import { fetchProfileDataDto } from "./dto/fetchProfileDataDto";
 export const fetchProfileData = async (
   studentId: string
 ): Promise<fetchProfileDataDto | null> => {
+  const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
+
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/user-info`,
@@ -11,6 +13,7 @@ export const fetchProfileData = async (
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ studentId }),
       }

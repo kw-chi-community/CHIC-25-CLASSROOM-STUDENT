@@ -27,7 +27,7 @@ const ProfileDetail = () => {
       {userData && (
         <div className="w-full space-y-28">
           <ProfileForm userData={userData} studentId={studentId || ""} />
-          <ProfileActions studentId={studentId} />
+          <ProfileActions studentId={studentId || ""} />
         </div>
       )}
     </CenteredPageWrapper>
