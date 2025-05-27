@@ -17,7 +17,7 @@ export const createReservation = async (data: createReservationDto) => {
       participantCount: data.participantCount,
     };
 
-    const response = await fetch("/api/make-reservation", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/make-reservation`, {
       method: "POST", // POST 요청 사용
       headers: {
         "Content-Type": "application/json", // 요청 본문이 JSON 형식임을 명시
