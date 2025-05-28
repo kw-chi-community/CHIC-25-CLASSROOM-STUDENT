@@ -4,7 +4,7 @@ export const updateReservation = async (data: updateReservationDto) => {
   const token = sessionStorage.getItem("accessToken");
   const studentId = sessionStorage.getItem("studentId"); // 세션스토리지에서 학생 ID를 가져옴
 
-  const response = await fetch("/api/update-reservation", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/update-reservation`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

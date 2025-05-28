@@ -2,7 +2,7 @@ import { fetchReservationNoticesDto } from "./dto/fetchReservationNoticesDto";
 
 export const fetchReservationNotices = async () => {
   try {
-    const response = await fetch("/api/notice-list");
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/notice-list`);
 
     if (!response.ok) {
       throw new Error("데이터를 가져오는 데 실패했습니다.");

@@ -4,7 +4,7 @@ export const fetchReservationList = async (studentId: string) => {
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
 
-    const response = await fetch("/api/reservation-list", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/reservation-list`, {
       method: "POST", // POST 요청 사용
       headers: {
         "Content-Type": "application/json", // 요청 본문이 JSON 형식임을 명시

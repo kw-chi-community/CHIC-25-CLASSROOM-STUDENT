@@ -4,7 +4,7 @@ export const fetchNoticePopup = async (studentId: string) => {
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
 
-    const response = await fetch("/api/show-notice-popup", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/show-notice-popup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
