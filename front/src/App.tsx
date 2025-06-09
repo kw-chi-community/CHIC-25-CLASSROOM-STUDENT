@@ -3,6 +3,7 @@ import { ROUTES } from "./constants/routes";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import React from "react"; // 🔥 꼭 있어야 함
 
 const router = createBrowserRouter([
   {
@@ -10,20 +11,20 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.HOME.element />
+          {React.createElement(ROUTES.HOME.element)}
         </Layout>
       </ProtectedRoute>
     ),
   },
   {
     path: ROUTES.LOGIN.path,
-    element: <ROUTES.LOGIN.element />,
+    element: React.createElement(ROUTES.LOGIN.element),
   },
   {
     path: ROUTES.SIGNUP.path,
     element: (
       <Layout>
-        <ROUTES.SIGNUP.element />
+        {React.createElement(ROUTES.SIGNUP.element)}
       </Layout>
     ),
   },
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.MAKE_RESERVATION.element />
+          {React.createElement(ROUTES.MAKE_RESERVATION.element)}
         </Layout>
       </ProtectedRoute>
     ),
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.UPDATE_RESERVATION.element />
+          {React.createElement(ROUTES.UPDATE_RESERVATION.element)}
         </Layout>
       </ProtectedRoute>
     ),
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.RESERVATION_STATUS.element />
+          {React.createElement(ROUTES.RESERVATION_STATUS.element)}
         </Layout>
       </ProtectedRoute>
     ),
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.NOTICE.element />
+          {React.createElement(ROUTES.NOTICE.element)}
         </Layout>
       </ProtectedRoute>
     ),
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.NOTICE_DETAIL.element />
+          {React.createElement(ROUTES.NOTICE_DETAIL.element)}
         </Layout>
       </ProtectedRoute>
     ),
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.MYPAGE.element />
+          {React.createElement(ROUTES.MYPAGE.element)}
         </Layout>
       </ProtectedRoute>
     ),
@@ -92,7 +93,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <ROUTES.PROFILE_DETAIL.element />
+          {React.createElement(ROUTES.PROFILE_DETAIL.element)}
         </Layout>
       </ProtectedRoute>
     ),

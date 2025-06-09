@@ -16,3 +16,29 @@
 
 **Front**: React, TypeScript, tailwindCSS, Vite  
 **Beckend**: Node JS
+
+## 💡 실행 방법 안내
+
+### 1. 레포지토리 클론
+
+```bash
+git clone https://github.com/kw-chi-community/CHIC-25-CLASSROOM-STUDENT.git
+cd CHIC-25-CLASSROOM-STUDENT
+```
+
+### 2. Docker 컨테이너 실행
+
+```bash
+docker compose up
+```
+
+### 3. 서비스 접속
+
+http://localhost:3000
+
+컨테이너가 이상하게 동작하거나 캐시 문제로 잘 안 될 경우:
+```bash
+docker compose down --volumes --remove-orphans
+docker compose build --no-cache
+docker compose up
+```

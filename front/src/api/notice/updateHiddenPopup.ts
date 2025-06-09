@@ -2,7 +2,7 @@ import { updateHiddenPopupDto } from "./dto/updateHiddenPopupDto";
 
 export const updateHiddenPopup = async (data: updateHiddenPopupDto) => {
   const token = sessionStorage.getItem("accessToken");
-  const response = await fetch("/api/hidden-popup", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hidden-popup`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

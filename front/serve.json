@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/**", "destination": "http://backend:4000/api/" },
+    { "source": "**", "destination": "/index.html" }
+  ]
+}

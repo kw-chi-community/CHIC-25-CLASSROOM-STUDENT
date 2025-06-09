@@ -8,7 +8,7 @@ export const fetchReservationSchedules = async (
   try {
     const token = sessionStorage.getItem("accessToken"); // 세션스토리지에서 토큰을 가져옴
 
-    const response = await fetch("/api/classroom-reservation", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/classroom-reservation`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
