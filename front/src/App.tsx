@@ -3,16 +3,16 @@ import { ROUTES } from "./constants/routes";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import React from "react"; // 🔥 꼭 있어야 함
+import { PWAUpdatePrompt } from "./components/PWAUpdatePrompt";
+import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
+import React from "react";
 
 const router = createBrowserRouter([
   {
     path: ROUTES.HOME.path,
     element: (
       <ProtectedRoute>
-        <Layout>
-          {React.createElement(ROUTES.HOME.element)}
-        </Layout>
+        <Layout>{React.createElement(ROUTES.HOME.element)}</Layout>
       </ProtectedRoute>
     ),
   },
@@ -22,19 +22,13 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTES.SIGNUP.path,
-    element: (
-      <Layout>
-        {React.createElement(ROUTES.SIGNUP.element)}
-      </Layout>
-    ),
+    element: <Layout>{React.createElement(ROUTES.SIGNUP.element)}</Layout>,
   },
   {
     path: ROUTES.MAKE_RESERVATION.path,
     element: (
       <ProtectedRoute>
-        <Layout>
-          {React.createElement(ROUTES.MAKE_RESERVATION.element)}
-        </Layout>
+        <Layout>{React.createElement(ROUTES.MAKE_RESERVATION.element)}</Layout>
       </ProtectedRoute>
     ),
   },
@@ -62,9 +56,7 @@ const router = createBrowserRouter([
     path: ROUTES.NOTICE.path,
     element: (
       <ProtectedRoute>
-        <Layout>
-          {React.createElement(ROUTES.NOTICE.element)}
-        </Layout>
+        <Layout>{React.createElement(ROUTES.NOTICE.element)}</Layout>
       </ProtectedRoute>
     ),
   },
@@ -72,9 +64,7 @@ const router = createBrowserRouter([
     path: ROUTES.NOTICE_DETAIL.path,
     element: (
       <ProtectedRoute>
-        <Layout>
-          {React.createElement(ROUTES.NOTICE_DETAIL.element)}
-        </Layout>
+        <Layout>{React.createElement(ROUTES.NOTICE_DETAIL.element)}</Layout>
       </ProtectedRoute>
     ),
   },
@@ -82,9 +72,7 @@ const router = createBrowserRouter([
     path: ROUTES.MYPAGE.path,
     element: (
       <ProtectedRoute>
-        <Layout>
-          {React.createElement(ROUTES.MYPAGE.element)}
-        </Layout>
+        <Layout>{React.createElement(ROUTES.MYPAGE.element)}</Layout>
       </ProtectedRoute>
     ),
   },
@@ -92,9 +80,7 @@ const router = createBrowserRouter([
     path: ROUTES.PROFILE_DETAIL.path,
     element: (
       <ProtectedRoute>
-        <Layout>
-          {React.createElement(ROUTES.PROFILE_DETAIL.element)}
-        </Layout>
+        <Layout>{React.createElement(ROUTES.PROFILE_DETAIL.element)}</Layout>
       </ProtectedRoute>
     ),
   },
@@ -104,6 +90,8 @@ function App() {
   return (
     <AuthProvider>
       <RouterProvider router={router} />
+      <PWAUpdatePrompt />
+      <PWAInstallPrompt />
     </AuthProvider>
   );
 }
