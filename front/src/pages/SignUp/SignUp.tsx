@@ -106,7 +106,7 @@ const SignUp = () => {
 
           {/* 학번 입력 + 중복 확인 */}
           <div className="flex space-x-2">
-            <div className="flex-grow-[2]">
+            <div className="flex-1">
               <Input
                 type="text"
                 placeholder="학번을 입력하세요"
@@ -114,7 +114,7 @@ const SignUp = () => {
                 onChange={handleStudentIdChange}
               />
             </div>
-            <div className="flex-grow">
+            <div className="flex-shrink-0">
               <Button
                 onClick={handleCheckStudentId}
                 text={isIdCheckDisabled ? "사용 가능" : "중복 확인"}

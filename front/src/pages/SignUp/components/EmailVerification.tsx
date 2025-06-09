@@ -89,15 +89,15 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
     <div>
       {/* 이메일 입력 + 인증 요청 버튼 */}
       <div className="flex space-x-2">
-        <div className="flex-grow-[2]">
+        <div className="flex-1">
           <Input
             type="email"
-            placeholder="광운대학교 메일주소 (@kw.ac.kr)"
+            placeholder="광운대 메일주소 (@kw.ac.kr)"
             value={emailInput}
             onChange={(e) => setEmailInput(e.target.value)}
           />
         </div>
-        <div className="flex-grow">
+        <div className="flex-shrink-0">
           <Button
             onClick={handleSubmit}
             text={
@@ -120,7 +120,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
       {/* 인증번호 입력 + 확인 버튼 */}
       {countdown > 0 && !isVerified && (
         <div className="flex space-x-2 mt-4">
-          <div className="flex-grow-[2]">
+          <div className="flex-1">
             <Input
               type="text"
               placeholder="인증번호"
@@ -128,7 +128,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({
               onChange={(e) => setVerificationCode(e.target.value)}
             />
           </div>
-          <div className="flex-grow">
+          <div className="flex-shrink-0">
             {" "}
             <Button
               onClick={handleVerification}
