@@ -65,11 +65,13 @@ const ReservationNotice = () => {
             {error} {/* 에러 메시지와 아이콘 추가 */}
           </p>
         ) : notices.length > 0 ? (
-          notices.map((notice) => (
+          notices.map((notice, index) => (
             <Link
               to={`/notice/${notice.id}`}
               key={notice.id}
-              className="block border-b border-gray pb-2 pt-1 hover:text-purple transition-all duration-200"
+              className={`block pb-2 pt-1 hover:text-purple transition-all duration-200 ${
+                index !== notices.length - 1 ? "border-b border-gray" : ""
+              }`}
             >
               <div className="flex justify-between items-center gap-2">
                 <span className="flex items-center gap-x-1 truncate">
@@ -81,7 +83,7 @@ const ReservationNotice = () => {
                   <span className="truncate">{notice.title}</span>
                 </span>
                 {notice.type === true && (
-                  <span className="text-sm text-darkgray">
+                  <span className="text-sm text-darkgray whitespace-nowrap">
                     {notice.created_at}
                   </span>
                 )}
