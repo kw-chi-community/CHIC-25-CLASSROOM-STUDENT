@@ -30,7 +30,7 @@ const NoticePopup = ({ studentId, notice, onClose }: NoticePopupProps) => {
 
   return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="flex flex-col bg-white w-full mx-4 max-w-md p-6 rounded-2xl relative shadow-xl border border-gray-200">
+      <div className="flex flex-col bg-white w-full mx-8 max-w-md p-6 rounded-2xl relative shadow-xl border border-gray-200">
         <div className="flex flex-col items-center">
           <h2 className="text-xl font-bold mb-3 text-center">{notice.title}</h2>
           <p className="text-center whitespace-pre-wrap leading-relaxed mb-6">

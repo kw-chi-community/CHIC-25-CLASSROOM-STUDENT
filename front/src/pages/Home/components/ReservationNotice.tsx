@@ -80,7 +80,7 @@ const ReservationNotice = () => {
                   ) : (
                     <span>[일반]</span>
                   )}
-                  <span className="truncate">{notice.title}</span>
+                  <span className="truncate text-ellipsis">{notice.title}</span>
                 </span>
                 {notice.type === true && (
                   <span className="text-sm text-darkgray whitespace-nowrap">

@@ -35,11 +35,11 @@ const NoticePage = () => {
 
   return (
     <PageWrapper>
-      <div className="space-y-2 w-full">
+      <div className="space-y-2 w-full rounded-lg">
         {error ? (
           <p>{error}</p>
         ) : notices.length > 0 ? (
-          <div className="shadow-sm border border-gray">
+          <div className="shadow-sm border border-gray rounded-lg">
             {importantNotices.map((notice) => (
               <Link
                 to={`/notice/${notice.id}`}
@@ -49,7 +49,9 @@ const NoticePage = () => {
                 <div className="flex justify-between items-center gap-2">
                   <span className="flex items-center gap-x-1 truncate">
                     <span className="text-purple font-semibold">[중요]</span>{" "}
-                    {notice.title}
+                    <span className="truncate text-ellipsis">
+                      {notice.title}
+                    </span>
                   </span>
                 </div>
               </Link>
@@ -62,9 +64,12 @@ const NoticePage = () => {
               >
                 <div className="flex justify-between items-center gap-2">
                   <span className="flex items-center gap-x-1 truncate">
-                    [일반] {notice.title}
+                    <span>[일반]</span>{" "}
+                    <span className="truncate text-ellipsis">
+                      {notice.title}
+                    </span>
                   </span>
-                  <span className="text-sm text-darkgray">
+                  <span className="text-sm text-darkgray whitespace-nowrap">
                     {notice.created_at}
                   </span>
                 </div>
