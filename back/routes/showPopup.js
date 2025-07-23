@@ -24,6 +24,9 @@ router.post("/show-notice-popup", auth, async (req, res) => {
         id: n._id,
         title: n.title,
         contents: n.contents,
+        isHidden,
+        start_date: n.start_date.toISOString().slice(0, 10),
+        end_date: n.end_date.toISOString().slice(0, 10),
       };
     });
 
